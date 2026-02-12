@@ -4,8 +4,8 @@ The app is built in React.
 The apps is still in early stages of developement so this README is a mess of ideas and requirements but I'll update it along with developement and clean it up once I'll finish the app.
 
 The closest goal is: API product search bar
-~~- Init the project (Vite + I'll worry about routing later?)~~
-~~- create MVP of a search bar that connects to [changed to usda](https://fdc.nal.usda.gov) and gets back all the necesarry info (+ discards the unnecesarry info because ther is A LOT of info there)~~
+- ~~Init the project (Vite + I'll worry about routing later?)~~
+- ~~create MVP of a search bar that connects to [changed to usda](https://fdc.nal.usda.gov) and gets back all the necesarry info (+ discards the unnecesarry info because ther is A LOT of info there)~~
 - display a product card with the info 
 - similar to product make an ingredient card with the info + inputs to control the quantity and calculate ourInfo based on user input (make it inline so we can reuse it in a list later)
 - so basically the user searches for "cheese" -> gets a list of product cards that api returned after the "cheese" search (we can do 1 for now) -> when selected we render an ingredient card with info + controls that recalculate the info based on quantity
