@@ -1,13 +1,12 @@
-import './App.css'
-import ProductList from './ProductList.jsx';
+import './styles/App.css'
+import Recipe from './Recipe.jsx';
 
 function App() {
 
   return (
     <>
       <h1>Diet planner app</h1>
-      <ProductList showSearchBar={true}/>
-      <p>Nutritional data aquired from <a href="https://fdc.nal.usda.gov/">FoodData Central</a></p>
+      <Recipe/>
     </>
   )
 }

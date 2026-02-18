@@ -1,0 +1,43 @@
+:root {
+      --energy-label: #468966;
+      --protein-label: #b64926;
+      --carbs-label: #a16d1e;
+      --fats-label: #466d89;
+    }
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.labels{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.label{
+    padding: 7px 15px;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.energy-label{
+    background-color: var(--energy-label);
+}
+
+.protein-label{
+    background-color: var(--protein-label);
+}
+
+.carbs-label{
+    background-color: var(--carbs-label);
+}
+
+.fats-label{
+    background-color: var(--fats-label);
+}
