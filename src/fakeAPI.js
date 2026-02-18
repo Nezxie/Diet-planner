@@ -99,6 +99,6 @@ export function fakeAPIGetList(query){
 }
 
 export function fakeAPIGetItem(id){
-    let item = foodList.filter(item=>item.id==id)
+    let item = foodList.filter(i=>i.id==id)
     return item;
 }

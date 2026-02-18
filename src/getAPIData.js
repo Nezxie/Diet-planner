@@ -5,6 +5,6 @@ export async function getFoodList(query){
 }
 
 export async function getFoodItemInfo(itemId){
-    let item = await fakeAPIGetItem(itemId);
+    let [item] = await fakeAPIGetItem(itemId);
     return item;
 }

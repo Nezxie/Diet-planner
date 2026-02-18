@@ -21,6 +21,8 @@ li{
 }
 
 .label{
+    color:rgba(255, 255, 255, 0.87);
+    font-weight: 500;
     padding: 7px 15px;
     border-radius: 10px;
     margin: 5px;

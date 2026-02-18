@@ -1,4 +1,5 @@
 import {useState} from "react";
+import './styles/SearchBar.css'
 
 export default function SearchBar({onSubmit}){
     const [query, setQuery] = useState("");
@@ -13,9 +14,9 @@ export default function SearchBar({onSubmit}){
     }
 
       return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="search-form">
             <input name="query" onChange={handleTextInput} value={query}></input>
-            <button type="submit">Search</button>
+            <button type="submit" className="search-button">Search</button>
         </form>
     )
 }
