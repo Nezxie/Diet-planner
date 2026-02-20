@@ -1,7 +1,5 @@
 import {useState} from 'react'
 import './styles/RecipeCard.css'
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import InlineEditable from './InlineEditable.jsx'
 import MacroLabel from './MacroLabel.jsx'
@@ -31,7 +29,6 @@ function calculateMealMacro(ingredientList){
 }
 
 export default function RecipeCard({ingredientList,title,onRemoveIngredient, onQuantityChange}){
-
     const [recipeName, setRecipeName] = useState(title)
 
     let mealMacro = {
@@ -75,6 +72,7 @@ export default function RecipeCard({ingredientList,title,onRemoveIngredient, onQ
                 onSave={(newValue)=>{setRecipeName(newValue)}}
                 displayAs={"h2"}
                 type={"text"}
+                className='full-width'
                         />
             <MacroLabel item={mealMacro}/>
             <ul>
