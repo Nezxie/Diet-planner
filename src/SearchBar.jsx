@@ -1,6 +1,7 @@
 import {useState} from "react";
+import './styles/SearchBar.css'
 
-export default function SearchBar({strictSearch, onSubmit, onCheckbox}){
+export default function SearchBar({onSubmit}){
     const [query, setQuery] = useState("");
     
     function handleTextInput(e){
@@ -13,11 +14,9 @@ export default function SearchBar({strictSearch, onSubmit, onCheckbox}){
     }
 
       return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="search-form">
             <input name="query" onChange={handleTextInput} value={query}></input>
-            <label htmlFor="checkbox">Require all words?</label>
-            <input id="checkbox" type="checkbox" onChange={onCheckbox} checked={strictSearch}></input>
-            <button type="submit">Search</button>
+            <button type="submit" className="search-button">Search</button>
         </form>
     )
 }

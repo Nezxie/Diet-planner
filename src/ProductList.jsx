@@ -1,36 +1,22 @@
-import {useState, useEffect} from "react";
-import SearchBar from './SearchBar.jsx'
-import {getFoodList, getFoodItemInfo, foodCategoriesEmojiDictionary} from "./getAPIData.js"
+import './styles/ProductList.css'
+import MacroLabel from './MacroLabel.jsx'
 
-
-export default function ProductList(showSearchBar){
-    const [foodList, setFoodList] = useState("");
-    const [strictSearch, setStrictSearch] = useState(false);
-    const APIConfig = {
-            "dataTypeFilter":"Foundation",
-            "pageSize":25,
-            "sortBy":"lowercaseDescription.keyword",
-            "requireAllWords":strictSearch
-        }
-
-    async function onFormSubmit(query){
-        let listOfProduce = await getFoodList({...APIConfig,"query":query});
-        setFoodList(listOfProduce);
+export default function ProductList({foodList,onSelectProduct}){
+    let list = <p>No products found.</p>
+    if(foodList.length>0){
+        list = foodList.map((item)=>{
+                return (
+                    <li key={item.id}>
+                        <button onClick={()=>{onSelectProduct(item.id)}}>+</button>
+                        <h2>{item.name}</h2>
+                        <MacroLabel item={item} />
+                    </li>
+                )
+            })
     }
-
     return (
-        <>
-        {showSearchBar&&<SearchBar 
-        onSubmit={onFormSubmit} 
-        onCheckbox={(e)=>{setStrictSearch(e.target.checked)}}
-        strictSearch={strictSearch}
-        />}
         <ul>
-            {foodList&&foodList.foods.map((item)=>{
-                console.log(item)
-                return <li key={item.fdcId}>{foodCategoriesEmojiDictionary[item.foodCategory]}{item.description}</li>
-            })}
+            {list}
         </ul>
-        </>
     );
 }
