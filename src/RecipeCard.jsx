@@ -45,22 +45,25 @@ export default function RecipeCard({ingredientList,title,onRemoveIngredient, onQ
         mealMacro = calculateMealMacro(ingredientList);
         ingredients = ingredientList.map((item)=>{
             return (
-                <li key={item.id}>
-                            <h2>{item.name}</h2>
-                            <div className='labels'>
-                            <MacroLabel item={item}/>
-                            <div>
-                            <p className="label">Quantity: </p>
-                            <InlineEditable
+                <tr key={item.id}>
+                    <td>
+                        <h2>{item.name}</h2>
+                    </td>
+                    <td>
+                        <MacroLabel item={item}/>
+                    </td>
+                    <td>
+                        <InlineEditable
                             value={item.quantity}
                             onSave={(newValue)=>{onQuantityChange(item.id,newValue)}}
                             displayAs={"span"}
                             type={"number"}
-                            />
-                            </div>
-                            <button onClick={()=>{onRemoveIngredient(item.id)}}><DeleteOutlinedIcon/></button>
-                            </div>
-                            </li>
+                        />
+                    </td>
+                    <td>
+                        <button onClick={()=>{onRemoveIngredient(item.id)}}><DeleteOutlinedIcon/></button>
+                    </td>
+                            </tr>
             )
         })
     }
@@ -75,9 +78,20 @@ export default function RecipeCard({ingredientList,title,onRemoveIngredient, onQ
                 className='full-width'
                         />
             <MacroLabel item={mealMacro}/>
-            <ul>
-                {ingredients}
-            </ul>
+
+            <table className="ingredients-table">
+                <thead>
+                <tr>
+                <th>Name</th>
+                <th>Macros per 100g</th>
+                <th>Quantity (g)</th>
+                <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    {ingredients}
+                </tbody>
+            </table>
         </div>
     );
 }
