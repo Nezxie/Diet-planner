@@ -2,7 +2,7 @@
     margin-top:2em;
     background-color: var(--bg-card-color);
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
 }
 .full-width{
     width: 100%;

@@ -46,7 +46,7 @@ export default function InlineEditable({value,onSave,placeholder="Untitled", cla
                                  <EditComponent 
                                     autoFocus
                                     type={type} 
-                                    className='inline-editable-input' 
+                                    className={`inline-editable-input ${displayAs}` }
                                     onChange={(e)=>{setDraftValue(e.target.value)}} 
                                     value={draftValue}
                                     onKeyDown={(e) => {

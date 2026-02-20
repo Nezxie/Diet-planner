@@ -37,7 +37,7 @@
     }
 
 .inline-editable-input{
-    background: transparent;
+  background: transparent;
   border: none;
   outline: none;
 
@@ -63,36 +63,29 @@ textarea.inline-editable-input {
   line-height: 1.4;
 }
 
-.recipe-title-form{
-    width:100%;
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 8px;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-    button{
-            background-color: transparent;
-            padding:5px;
-        }
-        button:focus,
-        button:focus-visible
-        {
-            outline: none;
-        }
-
-        button:hover {
-            border-color: transparent;
-        }
-    h2{
-        margin:0px;
-    }
+.inline-editable-input.h1{
+    font-size: 3.2em;
+    line-height: 1.1;
+    font-weight: bold;
+}
+.inline-editable-input.h2{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.inline-editable-input.h3{
+    font-size: 1.17em;
+    font-weight: bold;
+}
+.inline-editable-input.h4{
+    font-size: 1em;
+    font-weight: bold;
+}
+.inline-editable-input.h5{
+    font-size:  0.83em;
+    font-weight: bold;
+}
+.inline-editable-input.h6{
+    font-size: 0.67em;
+    font-weight: bold;
 }
 
-.recipe-title-form:hover {
-  background-color: var(--bg-color-editable-text-hover);
-}
-
-.recipe-title-form:focus-within {
-  background-color: var(--bg-color-editable-text-editing);
-}

@@ -7,6 +7,7 @@
   --bg-color-editable-text-editing:#242424;
 
   /*buttons and links*/
+  --border-radius:8px;
   --bg-color-button:#1a1a1a;
   --bg-color-button-active:#1a1a1a;
   --button-border-color:transparent;
@@ -105,7 +106,7 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   border: 1px solid var(--button-border-color);
   padding: 0.6em 1.2em;
   font-size: 1em;

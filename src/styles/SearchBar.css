@@ -4,6 +4,8 @@
     align-items: center;
     input{
         font-size: 1.2em;
+        border-radius: var(--border-radius);
+        border: 2px solid var(--button-border-color-active);
     }
 }
 .search-button{
