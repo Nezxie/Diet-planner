@@ -4,6 +4,22 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import InlineEditable from './InlineEditable.jsx'
 import MacroLabel from './MacroLabel.jsx'
 
+function calculateIngredientMacro(ingredient){
+    let energy=ingredient.nutriens.energy*ingredient.quantity/100;
+    let protein=ingredient.nutriens.protein*ingredient.quantity/100;
+    let carbs=ingredient.nutriens.carbs*ingredient.quantity/100;
+    let fat=ingredient.nutriens.fat*ingredient.quantity/100;
+    return {
+        'nutriens':{
+            'energy':Math.round(energy,2),
+            'protein':Math.round(protein,2),
+            'carbs':Math.round(carbs,2),
+            'fat':Math.round(fat,2)
+        }
+        }
+}
+
+
 function calculateMealMacro(ingredientList){
     let energy=0;
     let protein=0;
@@ -11,10 +27,11 @@ function calculateMealMacro(ingredientList){
     let fat=0;
     let quantity=0;
     ingredientList.forEach((ingredient) => {
-        energy+=ingredient.nutriens.energy*(ingredient.quantity/100);
-        protein+=ingredient.nutriens.protein*(ingredient.quantity/100);
-        carbs+=ingredient.nutriens.carbs*(ingredient.quantity/100);
-        fat+=ingredient.nutriens.fat*(ingredient.quantity/100);
+        let macros = calculateIngredientMacro(ingredient)
+        energy+=macros.nutriens.energy;
+        protein+=macros.nutriens.protein;
+        carbs+=macros.nutriens.carbs;
+        fat+=macros.nutriens.fat;
         quantity+=ingredient.quantity;
     });
     return ({
@@ -50,7 +67,7 @@ export default function RecipeCard({ingredientList,title,onRemoveIngredient, onQ
                         <h2>{item.name}</h2>
                     </td>
                     <td>
-                        <MacroLabel item={item}/>
+                        <MacroLabel item={calculateIngredientMacro(item)}/>
                     </td>
                     <td>
                         <InlineEditable
@@ -83,7 +100,7 @@ export default function RecipeCard({ingredientList,title,onRemoveIngredient, onQ
                 <thead>
                 <tr>
                 <th>Name</th>
-                <th>Macros per 100g</th>
+                <th>Macronutrients</th>
                 <th>Quantity (g)</th>
                 <th></th>
                 </tr>
