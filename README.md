@@ -3,26 +3,36 @@ This is a diet planner app that helps with meal prepping and shopping.
 The app is built in React.
 The apps is still in early stages of developement so this README is a mess of ideas and requirements but I'll update it along with developement and clean it up once I'll finish the app.
 
-The closest goal is: API product search bar
+The closest goal is: API product search bar✔️
 - ~~Init the project (Vite + I'll worry about routing later?)~~
 - ~~create MVP of a search bar that connects to [changed to usda](https://fdc.nal.usda.gov) and gets back all the necesarry info (+ discards the unnecesarry info because ther is A LOT of info there)~~
-- display a product card with the info 
-- similar to product make an ingredient card with the info + inputs to control the quantity and calculate ourInfo based on user input (make it inline so we can reuse it in a list later)
-- so basically the user searches for "cheese" -> gets a list of product cards that api returned after the "cheese" search (we can do 1 for now) -> when selected we render an ingredient card with info + controls that recalculate the info based on quantity
-- *I'll later add an option to edit the protein instead of quantity -> so we can recalculate quantity based on nutriens input
-- define next goal better and clean up the README
+- ~~display a product card with the info ~~
+- ~~[what, no this doesn't make sense anymore] similar to product make an ingredient card with the info + inputs to control the quantity and calculate ourInfo based on user input (make it inline so we can reuse it in a list later)~~
+- ~~ [more or less] so basically the user searches for "cheese" -> gets a list of product cards that api returned after the "cheese" search (we can do 1 for now) -> when selected we render an ingredient card with info + controls that recalculate the info based on quantity~~
+- ~~[no i wont] *I'll later add an option to edit the protein instead of quantity -> so we can recalculate quantity based on nutriens input~~
+- ~~define next goal better and ~~ clean up the README (i'll do it when i'm done, nobody is going to read this anyway (i hope)
+
+Okay, new closest goals:Meal cleanup + Meal library
+- add better styling, start from small components so we can just forget about them and focus on building logic not on adjusting margins and stuff
+- save meal
+- figure out where the meal data resides cause it's messy now, i need to know what data i need where so I don't drown in data formating
+- accept that you will scrape some db for data and do your own ingredients db because all the free apis are meh
+- screen meal library - start with placeholder Arr of meals, then worry about storing and reading them (unless you have the local storage yet then maybe it's all good)
+- also add option to export meals to json and to import from file maybe? idk
+- should meal list include a search option? probably yes
+
 
 Upcomming goals:
 1) Meal
-  - make a list of ingredients - each time a user selects searched product add it to the list 
-  - add controls to delete ingredients from the list
-  - allow to rename the meal
+  - make a list of ingredients - each time a user selects searched product add it to the list ✔️
+  - add controls to delete ingredients from the list ✔️
+  - allow to rename the meal ✔️
   - add "Save" that saves to storage + retrieve the last saved meal on load
-  - *(not necessary for mvp but will help with 2) ) calculate nutriens for the whole meal (ingredients already know their own nutriens so this should be just a simple sum)
+  - *(not necessary for mvp but will help with 2) ) calculate nutriens for the whole meal (ingredients already know their own nutriens so this should be just a simple sum) ✔️
     
 2)  Meal library
   - (this is a new screen?) create Meal list that displays all the meals saved - each meal card has a name, ingredients + quantities + nutriens
-  - each meal can be edited (how: modal or new route ?) or deleted
+  - each meal can be edited (~~how: modal or new route ?~~ not a modal for sure, why complicate simple things?) and deleted
 
 3) Calendar/main planner
   - time to add the calendar ?
