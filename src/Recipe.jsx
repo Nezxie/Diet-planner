@@ -19,19 +19,26 @@ export default function Recipe ({}){
     }
 
     function addToRecipe(item){
-        //might want to add some popup or anything else, that's why I separated it from the onSelectProduct
         let ingredient = {...item};
         if(!recipeIngredients.some(i=>i.id==ingredient.id)){
             ingredient.quantity = 100;
             setRecipeIngredients([...recipeIngredients,ingredient])
         }
     }
+    function removeFromRecipe(id){
+        let newIngredients = [...recipeIngredients].filter((item)=>item.id!=id);
+        setRecipeIngredients(newIngredients);
+    }
+    function editIngredientQuantity(id, newValue){
+       let newIngredients=prev=>prev.map(item=> item.id === id?{...item,quantity:newValue}:item);
+       setRecipeIngredients(newIngredients);
+    }
 
     return(
         <>
         <SearchBar onSubmit={onSearch}/>
         {foodList&&<ProductList foodList={foodList} onSelectProduct={onSelectProduct}/>}
-        <RecipeCard ingredientList={recipeIngredients} title={"New recipe"}/>
+        <RecipeCard ingredientList={recipeIngredients} onRemoveIngredient={removeFromRecipe} title={"New recipe"} onQuantityChange={editIngredientQuantity}/>
         </>
     );
 }
