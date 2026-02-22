@@ -29,7 +29,6 @@ export default function InlineEditable({value,onSave,placeholder="Untitled", cla
         let newValue = validateInput(type,draftValue,placeholder)
         onSave(newValue);
         setIsEditing(false);
-        setDraftValue(newValue);
     }
     
     const DisplayComponent = displayAs;
@@ -37,7 +36,7 @@ export default function InlineEditable({value,onSave,placeholder="Untitled", cla
 
     if(!isEditing){
         return(
-            <div className={`inline-editable ${className}`} onClick={() => setIsEditing(true)}>
+            <div className={`inline-editable ${className}`} onClick={() => {setDraftValue(value);setIsEditing(true)}}>
                 <DisplayComponent className="inline-editable-value">{value}</DisplayComponent>
                 <button type='button' aria-label='edit'>{<EditOutlinedIcon/>}</button>
             </div>
