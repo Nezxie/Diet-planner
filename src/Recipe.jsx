@@ -1,9 +1,16 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {getFoodList,getFoodItemInfo} from './getAPIData.js'
 import RecipeCard from './RecipeCard.jsx'
 import IngredientsSearch from './IngredientsSearch.jsx'
 
-export default function Recipe ({}){
+function getRecipeFromSessionStorage(id){
+    let recipes = JSON.parse(localStorage.getItem("recipes"));
+    if(!recipes)
+        return {};
+    return recipes[id]||{}
+}
+
+export default function Recipe ({recipeId}){
     const [foodList, setFoodList] = useState(null);
     const [recipeIngredients, setRecipeIngredients] = useState([]);
     const [recipeName, setRecipeName] = useState("New recipe");
@@ -18,18 +25,24 @@ export default function Recipe ({}){
         addToRecipe(itemInfo);
     }
 
-    function onDiscardRecipe(){
-        //do a modal "are u sure"
-        setRecipeName("New recipe");
-        setRecipeIngredients([]);
+    function onDiscardRecipe(id){
+        if(confirm("Are you sure you want to discard all the changes?")){ //do this with custom react later maybe
+            let savedRecipe = getRecipeFromSessionStorage(id);
+            setRecipeName(savedRecipe.name||"New recipe");
+            setRecipeIngredients(savedRecipe.ingredients||[]);
+        }
     }
 
-    function onSaveRecipe(){
+    function onSaveRecipe(id){
+        let savedRecipes = JSON.parse(localStorage.getItem("recipes"))||{};
         let newRecipe = {
-            "id":1, //here get the last id saved and ++ it? so like id = savedRecipes.length
+            "id":id,
             "name":recipeName,
             "ingredients":recipeIngredients
         }
+        savedRecipes[id]=newRecipe;
+        let newSavedRecipes=JSON.stringify(savedRecipes);
+        localStorage.setItem("recipes",newSavedRecipes);
     }
 
     function addToRecipe(item){
@@ -60,6 +73,7 @@ export default function Recipe ({}){
         <RecipeCard 
         ingredientList={recipeIngredients}
         onRemoveIngredient={removeFromRecipe}
+        recipeId={recipeId}
         recipeName={recipeName}
         setRecipeName={setRecipeName}
         onQuantityChange={editIngredientQuantity}

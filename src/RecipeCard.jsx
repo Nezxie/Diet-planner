@@ -45,7 +45,17 @@ function calculateMealMacro(ingredientList){
     })
 }
 
-export default function RecipeCard({ingredientList, recipeName, setRecipeName, onRemoveIngredient, onQuantityChange, onSaveRecipe, onDiscardRecipe}){
+export default function RecipeCard(
+    {
+        recipeId,
+        recipeName,
+        setRecipeName,
+        ingredientList,
+        onRemoveIngredient,
+        onQuantityChange,
+        onSaveRecipe,
+        onDiscardRecipe
+    }){
 
     let mealMacro = {
         nutriens:{
@@ -111,8 +121,8 @@ export default function RecipeCard({ingredientList, recipeName, setRecipeName, o
             </table>:
             <p>Try adding ingredients from the list above to create your recipe.</p>}
             <div className='edit-actions'>
-                <button className='delete-button' onClick={onDiscardRecipe}><DeleteOutlinedIcon fontSize="small"/>Clear</button>
-                <button className='save-button' onClick={onSaveRecipe}><SaveOutlinedIcon fontSize="small"/>Save</button>
+                <button className='delete-button' onClick={()=>{onDiscardRecipe(recipeId)}}><DeleteOutlinedIcon fontSize="small"/>Clear</button>
+                <button className='save-button' onClick={()=>{onSaveRecipe(recipeId)}}><SaveOutlinedIcon fontSize="small"/>Save</button>
             </div>
         </div>
     );
