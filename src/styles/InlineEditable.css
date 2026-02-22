@@ -1,18 +1,21 @@
 .inline-editable{
-    display: flex;
-    justify-content: space-between;
+    display: inline-flex;
     align-items: center;
+    gap: 6px;
     padding: 0px 8px;
     border-radius: 6px;
     transition: all 0.2s ease;
 }
+
 .inline-editable button{
     background: transparent;
     border: none;
     padding: 2px;
     opacity: 0.5;
+    margin-left: auto;
     transition: opacity 120ms ease;
 }
+
 .inline-editable button:hover{
     opacity: 1;
 }
@@ -81,4 +84,8 @@ textarea.inline-editable-input {
 .inline-editable-input.h6{
     font-size: 0.67em;
     font-weight: bold;
+}
+.small-inline-number>.inline-editable-value,
+.small-inline-number>.inline-editable-input{
+    width: 5ch;
 }

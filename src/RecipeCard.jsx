@@ -74,6 +74,7 @@ export default function RecipeCard({ingredientList, recipeName, setRecipeName, o
                             onSave={(newValue)=>{onQuantityChange(item.id,newValue)}}
                             displayAs={"span"}
                             type={"number"}
+                            className='small-inline-number'
                         />
                     </td>
                     <td>
