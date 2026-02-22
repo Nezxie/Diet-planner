@@ -1,6 +1,6 @@
-import {useState} from 'react'
 import './styles/RecipeCard.css'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import InlineEditable from './InlineEditable.jsx'
 import MacroLabel from './MacroLabel.jsx'
 
@@ -45,8 +45,7 @@ function calculateMealMacro(ingredientList){
     })
 }
 
-export default function RecipeCard({ingredientList,title,onRemoveIngredient, onQuantityChange}){
-    const [recipeName, setRecipeName] = useState(title)
+export default function RecipeCard({ingredientList, recipeName, setRecipeName, onRemoveIngredient, onQuantityChange, onSaveRecipe, onDiscardRecipe}){
 
     let mealMacro = {
         nutriens:{
@@ -64,7 +63,7 @@ export default function RecipeCard({ingredientList,title,onRemoveIngredient, onQ
             return (
                 <tr key={item.id}>
                     <td>
-                        <h2>{item.name}</h2>
+                        <p>{item.name}</p>
                     </td>
                     <td>
                         <MacroLabel item={calculateIngredientMacro(item)}/>
@@ -78,7 +77,7 @@ export default function RecipeCard({ingredientList,title,onRemoveIngredient, onQ
                         />
                     </td>
                     <td>
-                        <button onClick={()=>{onRemoveIngredient(item.id)}}><DeleteOutlinedIcon/></button>
+                        <button className='delete-button' onClick={()=>{onRemoveIngredient(item.id)}}><DeleteOutlinedIcon fontSize="small"/></button>
                     </td>
                             </tr>
             )
@@ -96,7 +95,7 @@ export default function RecipeCard({ingredientList,title,onRemoveIngredient, onQ
                         />
             <MacroLabel item={mealMacro}/>
 
-            <table className="ingredients-table">
+            {ingredients?<table className="ingredients-table">
                 <thead>
                 <tr>
                 <th>Name</th>
@@ -108,7 +107,12 @@ export default function RecipeCard({ingredientList,title,onRemoveIngredient, onQ
                 <tbody>
                     {ingredients}
                 </tbody>
-            </table>
+            </table>:
+            <p>Try adding ingredients from the list above to create your recipe.</p>}
+            <div className='edit-actions'>
+                <button className='delete-button' onClick={onDiscardRecipe}><DeleteOutlinedIcon fontSize="small"/>Clear</button>
+                <button className='save-button' onClick={onSaveRecipe}><SaveOutlinedIcon fontSize="small"/>Save</button>
+            </div>
         </div>
     );
 }

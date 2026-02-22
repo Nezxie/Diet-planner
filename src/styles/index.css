@@ -6,12 +6,26 @@
   --bg-color-editable-text-hover:#242424;
   --bg-color-editable-text-editing:#242424;
 
+  --border-separator-color:#F9F8F6;
+  --box-shadow:
+  0 1px 2px rgba(0, 0, 0, 0.4),
+  0 8px 24px rgba(0, 0, 0, 0.5);
+
+  --bg-destructive: #eb9e9e;
+  --color-destructive: #eb9e9e;
+  --bg-success: #9ae8ce;
+  --color-success:#9ae8ce;
+  --color-active-destructive:#3e0d0d;
+  --color-active-success:#0e3b2c;
+
   /*buttons and links*/
+
   --border-radius:8px;
   --bg-color-button:#1a1a1a;
   --bg-color-button-active:#1a1a1a;
   --button-border-color:transparent;
   --button-border-color-active:#9f9c9c;
+
 
   --link-color:#F9F8F6;
   --link-color-active:#EFE9E3;
@@ -26,7 +40,7 @@
   --label-bg-color-carbs: #a16d1e;
   --label-bg-color-fats: #466d89;
   */
-  
+
   --label-bg-color-energy: #527d67;
   --label-bg-color-protein: #9d563f;
   --label-bg-color-carbs: #8a6835;
@@ -57,6 +71,19 @@
     --text-color:#000000;
     --bg-color-editable-text-hover:#D9CFC7;
     --bg-color-editable-text-editing:#D9CFC7;
+
+    --border-separator-color:#242424;
+     --box-shadow:
+  0 1px 3px rgba(0, 0, 0, 0.06),
+  0 10px 30px rgba(0, 0, 0, 0.14);
+
+    --bg-destructive: #eb9e9e;
+    --color-destructive: #9c2121;
+    --bg-success: #9ae8ce;
+    --color-success:#22946e;
+    --color-active-destructive:#3e0d0d;
+    --color-active-success:#0e3b2c;
+  
 
   /*buttons and links*/
   --bg-color-button:#D9CFC7;

@@ -8,7 +8,7 @@ export default function ProductList({foodList,onSelectProduct}){
                 return (
                     <li key={item.id}>
                         <button onClick={()=>{onSelectProduct(item.id)}}>+</button>
-                        <h2>{item.name}</h2>
+                        <p>{item.name}</p>
                         <MacroLabel item={item} />
                     </li>
                 )

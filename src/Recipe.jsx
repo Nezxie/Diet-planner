@@ -5,10 +5,11 @@ import RecipeCard from './RecipeCard.jsx'
 import {getFoodList,getFoodItemInfo} from './getAPIData.js'
 
 export default function Recipe ({}){
-    const [foodList, setFoodList] = useState(null); //there must be a better way to not display the foodlist "no data" than this, i'd rather init this to {}
+    const [foodList, setFoodList] = useState(null);
     const [recipeIngredients, setRecipeIngredients] = useState([]);
+    const [recipeName, setRecipeName] = useState("New recipe");
 
-    async function onSearch(query){
+    async function onIngredientSearch(query){
         const searchResults = await getFoodList(query);
         setFoodList(searchResults);
     }
@@ -18,6 +19,20 @@ export default function Recipe ({}){
         addToRecipe(itemInfo);
     }
 
+    function onDiscardRecipe(){
+        //do a modal "are u sure"
+        setRecipeName("New recipe");
+        setRecipeIngredients([]);
+    }
+
+    function onSaveRecipe(){
+        let newRecipe = {
+            "id":1, //here get the last id saved and ++ it? so like id = savedRecipes.length
+            "name":recipeName,
+            "ingredients":recipeIngredients
+        }
+    }
+
     function addToRecipe(item){
         let ingredient = {...item};
         if(!recipeIngredients.some(i=>i.id==ingredient.id)){
@@ -25,10 +40,12 @@ export default function Recipe ({}){
             setRecipeIngredients([...recipeIngredients,ingredient])
         }
     }
+
     function removeFromRecipe(id){
         let newIngredients = [...recipeIngredients].filter((item)=>item.id!=id);
         setRecipeIngredients(newIngredients);
     }
+
     function editIngredientQuantity(id, newValue){
        let newIngredients=prev=>prev.map(item=> item.id === id?{...item,quantity:newValue}:item);
        setRecipeIngredients(newIngredients);
@@ -36,9 +53,17 @@ export default function Recipe ({}){
 
     return(
         <>
-        <SearchBar onSubmit={onSearch}/>
+        <SearchBar onSubmit={onIngredientSearch}/>
         {foodList&&<ProductList foodList={foodList} onSelectProduct={onSelectProduct}/>}
-        <RecipeCard ingredientList={recipeIngredients} onRemoveIngredient={removeFromRecipe} title={"New recipe"} onQuantityChange={editIngredientQuantity}/>
+        <RecipeCard 
+        ingredientList={recipeIngredients}
+        onRemoveIngredient={removeFromRecipe}
+        recipeName={recipeName}
+        setRecipeName={setRecipeName}
+        onQuantityChange={editIngredientQuantity}
+        onDiscardRecipe={onDiscardRecipe}
+        onSaveRecipe={onSaveRecipe}
+        />
         </>
     );
 }

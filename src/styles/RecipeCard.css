@@ -3,7 +3,73 @@
     background-color: var(--bg-card-color);
     padding: 2rem;
     border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
 }
 .full-width{
     width: 100%;
+    margin-bottom: 1rem;
+}
+
+.recipe-card>.labels{
+    border-bottom: 1px var(--border-separator-color) solid;
+    margin-bottom: 1rem;
+    padding-bottom:1rem;
+}
+
+.ingredients-table{
+    width: 100%;
+}
+
+.ingredients-table .delete-button{
+    padding: .5em;
+}
+
+.ingredients-table th,
+.ingredients-table td{
+    padding: .5em 1em;
+}
+
+.edit-actions{
+    display: flex;
+    justify-content: end; 
+    gap:10px;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 1px var(--border-separator-color) solid;
+}
+
+.delete-button,
+.save-button
+{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  gap:2px;
+  background-color: var(--bg-color);
+  transition: all 0.2s ease;
+}
+
+.delete-button{
+  border-color: var(--color-destructive);
+  color:var(--color-destructive);
+}
+
+.save-button{
+  border-color: var(--color-success);
+  color:var(--color-success);
+}
+
+.save-button:hover,
+.save-button:active{
+    border-color: var(--color-active-success);
+    background-color: var(--bg-success);
+    color:var(--color-active-success);
+}
+
+.delete-button:hover,
+.delete-button:active{
+    border-color: var(--color-active-destructive);
+    background-color: var(--bg-destructive);
+    color:var(--color-active-destructive);
 }
