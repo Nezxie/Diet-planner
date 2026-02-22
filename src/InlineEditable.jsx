@@ -1,37 +1,44 @@
-import {useState} from 'react'
+import {useState, useId} from 'react'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import './styles/InlineEditable.css'
 
+function validateInput(inputType,inputValue,placeholder){
+    if(inputType === "text"){
+        inputValue=inputValue+"";
+        inputValue=inputValue.trim();
+        if(inputValue.length<1){
+            return placeholder;
+        }
+        return inputValue;
+    }
+    else if(inputType === "number"){
+        return parseInt(inputValue)||0;
+    }
+    else{
+        throw new Error(`Input type: ${inputType} has no validation handler declared. Accepted input types: "text", "number".`);
+    }
+}
 
 export default function InlineEditable({value,onSave,placeholder="Untitled", className="", displayAs="p", editAs="input", type="text"}){
     const [isEditing, setIsEditing] = useState(false);
     const [draftValue, setDraftValue] = useState(value);
-    
+    const id = useId()
+
     function handleSubmit(){
-        let newValue=draftValue;
-        if(type === "text"){
-            if(typeof draftValue == "string"){
-            newValue = draftValue.trim();
-                if(newValue.length<=0){
-                    newValue=placeholder;
-                }
-            }
-        }
-        else if(type === "number"){
-            newValue=parseInt(newValue)||0;
-        }
-        console.log(newValue, typeof newValue , draftValue, typeof draftValue );
-            onSave(newValue);
-            setIsEditing(false);
+        let newValue = validateInput(type,draftValue,placeholder)
+        onSave(newValue);
+        setIsEditing(false);
+        setDraftValue(newValue);
     }
+    
     const DisplayComponent = displayAs;
     const EditComponent = editAs;
 
     if(!isEditing){
         return(
             <div className={`inline-editable ${className}`} onClick={() => setIsEditing(true)}>
-                <DisplayComponent>{value}</DisplayComponent>
+                <DisplayComponent className="inline-editable-value">{value}</DisplayComponent>
                 <button type='button' aria-label='edit'>{<EditOutlinedIcon/>}</button>
             </div>
                                   
@@ -43,7 +50,8 @@ export default function InlineEditable({value,onSave,placeholder="Untitled", cla
                         handleSubmit();
                         }}
                         className={`inline-editable ${className}`}>
-                                 <EditComponent 
+                                 <EditComponent
+                                    id={id} 
                                     autoFocus
                                     type={type} 
                                     className={`inline-editable-input ${displayAs}` }

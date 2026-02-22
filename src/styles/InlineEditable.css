@@ -17,13 +17,7 @@
     opacity: 1;
 }
 
-.inline-editable h1,
-.inline-editable h2,
-.inline-editable h3,
-.inline-editable h4,
-.inline-editable h5,
-.inline-editable h6,
-.inline-editable p{
+.inline-editable-value{
     margin: 0;
 }
 
@@ -88,4 +82,3 @@ textarea.inline-editable-input {
     font-size: 0.67em;
     font-weight: bold;
 }
-
