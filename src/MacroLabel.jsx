@@ -1,3 +1,4 @@
+import './styles/MacroLabel.css'
 
 export default function MacroLabel({item}){
     return(

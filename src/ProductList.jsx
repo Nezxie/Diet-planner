@@ -7,7 +7,7 @@ export default function ProductList({foodList,onSelectProduct}){
         list = foodList.map((item)=>{
                 return (
                     <li key={item.id}>
-                        <button onClick={()=>{onSelectProduct(item.id)}}>+</button>
+                        <button onClick={()=>{onSelectProduct(item.id)}} className='add-button'>+</button>
                         <p>{item.name}</p>
                         <MacroLabel item={item} />
                     </li>
@@ -15,7 +15,7 @@ export default function ProductList({foodList,onSelectProduct}){
             })
     }
     return (
-        <ul>
+        <ul className='product-list'>
             {list}
         </ul>
     );

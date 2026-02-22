@@ -1,38 +1,22 @@
-ul{
+.product-list{
     list-style-type: none;
+    padding-left: 0px;
 }
 
-li{
-    display: flex;
-    justify-content: space-between;
+.product-list>li{
+    display: grid;
+    justify-content: center;
     align-items: center;
-}
-.labels{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.label{
-    color:var(---label-text-color);
-    font-weight: 500;
-    padding: 7px 15px;
-    border-radius: var(--border-radius);
-    margin: 5px;
+    grid-template-rows: 1fr;
+    grid-template-columns: .3fr 3fr 3fr;
+    gap: 1rem;
+    
+    .labels{
+        justify-self: end;
+    }
+    .add-button{
+        padding: 5px;
+        font-weight: bold;
+    }
 }
 
-.energy-label{
-    background-color: var(--label-bg-color-energy);
-}
-
-.protein-label{
-    background-color: var(--label-bg-color-protein);
-}
-
-.carbs-label{
-    background-color: var(--label-bg-color-carbs);
-}
-
-.fats-label{
-    background-color: var(--label-bg-color-fats);
-}

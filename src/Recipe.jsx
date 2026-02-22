@@ -1,8 +1,7 @@
 import {useState} from 'react'
-import SearchBar from "./SearchBar.jsx"
-import ProductList from './ProductList.jsx'
-import RecipeCard from './RecipeCard.jsx'
 import {getFoodList,getFoodItemInfo} from './getAPIData.js'
+import RecipeCard from './RecipeCard.jsx'
+import IngredientsSearch from './IngredientsSearch.jsx'
 
 export default function Recipe ({}){
     const [foodList, setFoodList] = useState(null);
@@ -53,8 +52,11 @@ export default function Recipe ({}){
 
     return(
         <>
-        <SearchBar onSubmit={onIngredientSearch}/>
-        {foodList&&<ProductList foodList={foodList} onSelectProduct={onSelectProduct}/>}
+        <IngredientsSearch
+        foodList={foodList}
+        onSelectProduct={onSelectProduct}
+        onIngredientSearch={onIngredientSearch}
+        />
         <RecipeCard 
         ingredientList={recipeIngredients}
         onRemoveIngredient={removeFromRecipe}

@@ -1,0 +1,29 @@
+.labels{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.label{
+    color:var(---label-text-color);
+    font-weight: 500;
+    padding: 7px 15px;
+    border-radius: var(--border-radius);
+    margin: 5px;
+}
+
+.energy-label{
+    background-color: var(--label-bg-color-energy);
+}
+
+.protein-label{
+    background-color: var(--label-bg-color-protein);
+}
+
+.carbs-label{
+    background-color: var(--label-bg-color-carbs);
+}
+
+.fats-label{
+    background-color: var(--label-bg-color-fats);
+}
