@@ -6,8 +6,8 @@ import IngredientsSearch from './IngredientsSearch.jsx'
 function getRecipeFromSessionStorage(id){
     let recipes = JSON.parse(localStorage.getItem("recipes"));
     if(!recipes)
-        return {};
-    return recipes[id]||{}
+        return [];
+    return recipes.find(r => r.id === id)||[]
 }
 
 export default function Recipe ({recipeId}){
@@ -34,13 +34,25 @@ export default function Recipe ({recipeId}){
     }
 
     function onSaveRecipe(id){
-        let savedRecipes = JSON.parse(localStorage.getItem("recipes"))||{};
+        let savedRecipes = JSON.parse(localStorage.getItem("recipes"))||[];
         let newRecipe = {
             "id":id,
             "name":recipeName,
             "ingredients":recipeIngredients
         }
-        savedRecipes[id]=newRecipe;
+
+        let editedRecipeIndex = savedRecipes.findIndex(r => r.id === id)
+        if(editedRecipeIndex !== -1){
+            savedRecipes[editedRecipeIndex]=newRecipe;
+        }
+        else if(editedRecipeIndex === -1){
+            savedRecipes.push(newRecipe);
+        }
+        else{
+            //this should never run unless findIndex changes how it's working
+            throw new Error("Error when trying to find if the recipe id already exists.");
+        }
+
         let newSavedRecipes=JSON.stringify(savedRecipes);
         localStorage.setItem("recipes",newSavedRecipes);
     }
