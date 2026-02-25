@@ -33,7 +33,7 @@
 .edit-actions{
     display: flex;
     justify-content: end; 
-    gap:10px;
+    gap:.5em;
     padding-top: 1rem;
     margin-top: 1rem;
     border-top: 1px var(--border-separator-color) solid;

@@ -12,3 +12,9 @@
     width: 100%;  
     margin:2em;  
 }
+.action-buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap: .5em;
+    margin-top: 1em;
+}

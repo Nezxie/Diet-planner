@@ -1,15 +1,12 @@
 import './styles/App.css'
-import Recipe from './Recipe.jsx';
-import RecipeList from './RecipeList.jsx'
-import {makeNewRecipeId} from './utils/recipeStorage.js'
+import Header from './Header.jsx'
 
 function App() {
 
   return (
     <>
-      <h1>Diet planner app</h1>
-      <RecipeList/>
-      <Recipe recipeId={makeNewRecipeId()}/>
+      <Header/>
+      <p>here will be the calendar and some fluff info for user</p>
     </>
   )
 }

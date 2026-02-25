@@ -1,9 +1,10 @@
+import { NavLink } from "react-router";
+import {getSavedRecipeList, deleteRecipeFromMemory} from './utils/recipeStorage.js'
+import {calculateMealMacro, calculateTotalQuantity} from './utils/calculateMacro.js'
 import './styles/RecipeList.css'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import {getSavedRecipeList, deleteRecipeFromMemory} from './utils/recipeStorage.js'
 import MacroLabel from './MacroLabel.jsx'
-import {calculateMealMacro, calculateTotalQuantity} from './utils/calculateMacro.js'
 
 export default function RecipeList({}){
     let recipes = getSavedRecipeList();
@@ -17,12 +18,9 @@ export default function RecipeList({}){
                         <p>{calculateTotalQuantity(recipe.ingredients)}g</p>   
                         <MacroLabel item={calculateMealMacro(recipe.ingredients)}/>
                         <div className='action-buttons'>
-                            <button className='edit-button' 
-                            onClick={()=>{
-                                console.log("edit",recipe.id)
-                            }}>
-                                <EditOutlinedIcon fontSize="small"/>Edit
-                            </button>
+                            <NavLink className='edit-button button' to={`/recipe/${recipe.id}`}>
+                                    <EditOutlinedIcon fontSize="small"/>Edit
+                            </NavLink>
 
                             <button className='delete-button' 
                             onClick={()=>{

@@ -1,10 +1,12 @@
 import {useState} from 'react'
+import { useParams } from "react-router";
 import {getFoodList,getFoodItemInfo} from './utils/getAPIData.js'
 import RecipeCard from './RecipeCard.jsx'
 import IngredientsSearch from './IngredientsSearch.jsx'
 import {getSavedRecipe, saveRecipeToMemory} from './utils/recipeStorage.js'
 
-export default function Recipe ({recipeId}){
+export default function Recipe (){
+    let {recipeId} = useParams();
     const [foodList, setFoodList] = useState(null);
     const [recipeIngredients, setRecipeIngredients] = useState([]);
     const [recipeName, setRecipeName] = useState("New recipe");
