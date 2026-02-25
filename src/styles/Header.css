@@ -5,6 +5,8 @@ nav{
   gap: 2em;
   background-color: var(--accent-color);
   padding: 1em 2em;
+  box-shadow: var(--box-shadow);
+  margin-bottom:2em;
 }
 nav>a{
   font-size: 1.5em;
