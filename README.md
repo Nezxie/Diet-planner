@@ -13,21 +13,21 @@ The closest goal is: API product search bar✔️
 - ~~define next goal better and ~~ clean up the README (i'll do it when i'm done, nobody is going to read this anyway (i hope)
 
 Okay, new closest goals:Meal cleanup + Meal library
-- add better styling, start from small components so we can just forget about them and focus on building logic not on adjusting margins and stuff
-- save meal
-- figure out where the meal data resides cause it's messy now, i need to know what data i need where so I don't drown in data formating
+- add better styling, start from small components so we can just forget about them and focus on building logic not on adjusting margins and stuff ✔️ (its not gonna get better, i'll just do it as I go becuase the vision is still unclear and low key i'm improvising the styles as i go)
+- save meal ✔️
+- figure out where the meal data resides cause it's messy now, i need to know what data i need where so I don't drown in data formating ( i guess in recipe comp? i hate that the macros are an object but it makes sense so i don't think i should simplyfy just to not create "mutated object opsiee" bugs, just learn to code to not introduce bugs like hello?) ✔️
 - accept that you will scrape some db for data and do your own ingredients db because all the free apis are meh
 - screen meal library - start with placeholder Arr of meals, then worry about storing and reading them (unless you have the local storage yet then maybe it's all good)
 - also add option to export meals to json and to import from file maybe? idk
-- should meal list include a search option? probably yes
+- should meal list include a search option? probably yes - and categories with filters sigh
 
 
 Upcomming goals:
-1) Meal
+1) Meal✔️
   - make a list of ingredients - each time a user selects searched product add it to the list ✔️
   - add controls to delete ingredients from the list ✔️
   - allow to rename the meal ✔️
-  - add "Save" that saves to storage + retrieve the last saved meal on load
+  - add "Save" that saves to storage + retrieve the last saved meal on load ✔️
   - *(not necessary for mvp but will help with 2) ) calculate nutriens for the whole meal (ingredients already know their own nutriens so this should be just a simple sum) ✔️
     
 2)  Meal library
