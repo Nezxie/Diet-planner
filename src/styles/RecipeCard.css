@@ -4,8 +4,8 @@
     padding: 2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    width: 100%;
 }
+
 .full-width{
     width: 100%;
     margin-bottom: 1rem;

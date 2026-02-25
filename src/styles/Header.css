@@ -1,11 +1,25 @@
 nav{
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 2em;
+  background-color: var(--accent-color);
+  padding: 1em 2em;
 }
 nav>a{
   font-size: 1.5em;
+  color:var(--menu-color);
+}
+nav>a:hover,
+nav>a:focus{
+  color:var(--menu-color-active);
+}
+
+.preferences{
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button{
