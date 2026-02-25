@@ -15,8 +15,11 @@
   --color-destructive: #eb9e9e;
   --bg-success: #9ae8ce;
   --color-success:#9ae8ce;
+  --bg-info: #9ea6eb;
+  --color-info: #9ea6eb;
   --color-active-destructive:#3e0d0d;
   --color-active-success:#0e3b2c;
+   --color-active-info:#0d123e;
 
   /*buttons and links*/
 
@@ -81,8 +84,12 @@
     --color-destructive: #9c2121;
     --bg-success: #9ae8ce;
     --color-success:#22946e;
+    --bg-info: #9ea6eb;
+    --color-info: #1b2682;
     --color-active-destructive:#3e0d0d;
     --color-active-success:#0e3b2c;
+    --color-active-info:#0d123e;
+
   
 
   /*buttons and links*/

@@ -1,9 +1,11 @@
+const storageKey = "recipes";
+
 export function getSavedRecipeList(){
-    return JSON.parse(localStorage.getItem("recipes"))||[]
+    return JSON.parse(localStorage.getItem(storageKey))||[]
 }
 
 export function getSavedRecipe(id){
-    let recipes = JSON.parse(localStorage.getItem("recipes"));
+    let recipes = JSON.parse(localStorage.getItem(storageKey));
     if(!recipes)
         return [];
     return recipes.find(r => r.id === id)||[]
@@ -23,10 +25,25 @@ export function saveRecipeToMemory(newRecipe){
         throw new Error("Error when trying to find if the recipe id already exists.");
     }
 
-    localStorage.setItem("recipes",JSON.stringify(savedRecipes));
+    localStorage.setItem(storageKey,JSON.stringify(savedRecipes));
 }
 
 export function makeNewRecipeId(){
-  let recipeList = JSON.parse(localStorage.getItem("recipes"))||[];
+  let recipeList = JSON.parse(localStorage.getItem(storageKey))||[];
   return recipeList.length;
+}
+
+export function deleteRecipeFromMemory(id){
+    let recipeList = getSavedRecipeList();
+    if(recipeList.length<2){
+        clearStorage();
+    }
+    else{
+        let newRecipeList = recipeList.filter((r) => r.id != id);
+        localStorage.setItem(storageKey,JSON.stringify(newRecipeList));
+    }
+}
+
+function clearStorage(){
+    localStorage.removeItem(storageKey); 
 }

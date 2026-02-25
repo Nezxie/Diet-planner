@@ -50,3 +50,8 @@ export function getEmptyMeal(){
         'quantity':0
     };
 }
+
+export function calculateTotalQuantity(ingredientList){
+    let macro = calculateMealMacro(ingredientList);
+    return macro.quantity;
+}
