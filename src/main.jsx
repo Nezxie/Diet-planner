@@ -14,7 +14,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/recipe-list" element={<RecipeListPage />} />
-        <Route path="/recipe/:id" element={<RecipePage />} />
+        <Route path="/recipe/:recipeId" element={<RecipePage />} />
         <Route path="/preferences" element={<PreferencesPage />} />
       </Routes>
     </BrowserRouter>

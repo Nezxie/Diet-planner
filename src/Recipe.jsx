@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { useParams } from "react-router";
 import {getFoodList,getFoodItemInfo} from './utils/getAPIData.js'
 import RecipeCard from './RecipeCard.jsx'
@@ -10,6 +10,14 @@ export default function Recipe (){
     const [foodList, setFoodList] = useState(null);
     const [recipeIngredients, setRecipeIngredients] = useState([]);
     const [recipeName, setRecipeName] = useState("New recipe");
+
+    useEffect(()=>{
+        let recipe = getSavedRecipe(recipeId);
+        if(Object.keys(recipe).length !== 0){
+            setRecipeIngredients(recipe.ingredients);
+            setRecipeName(recipe.name);
+        }
+    },[recipeId])
 
     async function onIngredientSearch(query){
         const searchResults = await getFoodList(query);
