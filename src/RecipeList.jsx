@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+import { useState, useEffect } from 'react';
 import {getSavedRecipeList, deleteRecipeFromMemory} from './utils/recipeStorage.js'
 import {calculateMealMacro, calculateTotalQuantity} from './utils/calculateMacro.js'
 import './styles/RecipeList.css'
@@ -6,12 +7,15 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import MacroLabel from './MacroLabel.jsx'
 
-export default function RecipeList({}){
-    let recipes = getSavedRecipeList();
+export default function RecipeList(){
+    const [recipesList, setRecipesList] = useState([])
+    useEffect(()=>{
+        setRecipesList(getSavedRecipeList());
+    },[])
 
     return(
         <ul className='recipe-list'>
-            {recipes.map(recipe=>{
+            {recipesList.map(recipe=>{
                 return(
                     <li key={recipe.id}>
                         <h2>{recipe.name}</h2>
@@ -25,7 +29,7 @@ export default function RecipeList({}){
                             <button className='delete-button' 
                             onClick={()=>{
                                 if(confirm(`Are you sure you want to permanently delete ${recipe.name}?`)){
-                                    deleteRecipeFromMemory(recipe.id);
+                                   setRecipesList(deleteRecipeFromMemory(recipe.id));  
                                 }
                             }}>
                                 <DeleteOutlinedIcon fontSize="small"/>Delete

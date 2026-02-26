@@ -31,13 +31,15 @@ export function saveRecipeToMemory(newRecipe){
 
 export function deleteRecipeFromMemory(id){
     let recipeList = getSavedRecipeList();
+    let newRecipeList = [];
     if(recipeList.length<2){
         clearStorage();
     }
     else{
-        let newRecipeList = recipeList.filter((r) => r.id != id);
+        newRecipeList = recipeList.filter((r) => r.id != id);
         localStorage.setItem(STORAGE_KEY,JSON.stringify(newRecipeList));
     }
+    return newRecipeList;
 }
 
 export function makeNewRecipeId(){
