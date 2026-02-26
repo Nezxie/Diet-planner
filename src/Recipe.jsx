@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { useParams } from "react-router";
 import {getFoodList,getFoodItemInfo} from './utils/getAPIData.js'
-import RecipeCard from './RecipeCard.jsx'
+import RecipeCardEditable from './RecipeCardEditable.jsx'
 import IngredientsSearch from './IngredientsSearch.jsx'
 import {getSavedRecipe, saveRecipeToMemory} from './utils/recipeStorage.js'
 
@@ -71,7 +71,7 @@ export default function Recipe (){
         onSelectProduct={onSelectProduct}
         onIngredientSearch={onIngredientSearch}
         />
-        <RecipeCard 
+        <RecipeCardEditable 
         ingredientList={recipeIngredients}
         onRemoveIngredient={removeFromRecipe}
         recipeId={recipeId}

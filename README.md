@@ -17,7 +17,7 @@ Okay, new closest goals:Meal cleanup + Meal library
 - save meal ✔️
 - figure out where the meal data resides cause it's messy now, i need to know what data i need where so I don't drown in data formating ( i guess in recipe comp? i hate that the macros are an object but it makes sense so i don't think i should simplyfy just to not create "mutated object opsiee" bugs, just learn to code to not introduce bugs like hello?) ✔️
 - accept that you will scrape some db for data and do your own ingredients db because all the free apis are meh
-- screen meal library - start with placeholder Arr of meals, then worry about storing and reading them (unless you have the local storage yet then maybe it's all good)
+- screen meal library - start with placeholder Arr of meals, then worry about storing and reading them (unless you have the local storage yet then maybe it's all good)✔️
 - also add option to export meals to json and to import from file maybe? idk
 - should meal list include a search option? probably yes - and categories with filters sigh
 
@@ -30,9 +30,9 @@ Upcomming goals:
   - add "Save" that saves to storage + retrieve the last saved meal on load ✔️
   - *(not necessary for mvp but will help with 2) ) calculate nutriens for the whole meal (ingredients already know their own nutriens so this should be just a simple sum) ✔️
     
-2)  Meal library
-  - (this is a new screen?) create Meal list that displays all the meals saved - each meal card has a name, ingredients + quantities + nutriens
-  - each meal can be edited (~~how: modal or new route ?~~ not a modal for sure, why complicate simple things?) and deleted
+2)  Meal library✔️
+  - (this is a new screen?) create Meal list that displays all the meals saved - each meal card has a name, ingredients + quantities + nutriens✔️
+  - each meal can be edited (~~how: modal or new route ?~~ not a modal for sure, why complicate simple things?) and deleted✔️
 
 3) Calendar/main planner
   - time to add the calendar ?
