@@ -31,12 +31,14 @@ export default function Recipe ({notifySaved, notifyClear, notifyRestore}){
     }
 
     function onDiscardRecipe(id){
-        if(confirm("Are you sure you want to discard all the changes and restore last save?")){ //do this with custom react later maybe
+        //I think it's annoying, although it would be nice to have an alert before a destructive action,
+        //but we also don't have a warning before exiting the page without saving, so i don't think it matters that much
+       // if(confirm("Are you sure you want to discard all the changes and restore last save?")){ //do this with custom react later maybe
             let savedRecipe = getSavedRecipe(id);
             setRecipeName(savedRecipe.name||"New recipe");
             setRecipeIngredients(savedRecipe.ingredients||[]);
             notifyRestore();
-        }
+        //}
     }
 
     function onClearRecipe(id){

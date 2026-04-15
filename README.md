@@ -19,7 +19,7 @@ Okay, new closest goals:Meal cleanup + Meal library
 - accept that you will scrape some db for data and do your own ingredients db because all the free apis are meh
 - screen meal library - start with placeholder Arr of meals, then worry about storing and reading them (unless you have the local storage yet then maybe it's all good)✔️
 - also add option to export meals to json and to import from file maybe? idk
-- should meal list include a search option? probably yes - and categories with filters sigh
+- should meal list include a search option? probably yes - and categories with filters sigh ✔️ (added search, i can add categories but whatever for now)
 
 
 Upcomming goals:
@@ -33,7 +33,7 @@ Upcomming goals:
 2)  Meal library✔️
   - (this is a new screen?) create Meal list that displays all the meals saved - each meal card has a name, ingredients + quantities + nutriens✔️
   - each meal can be edited (~~how: modal or new route ?~~ not a modal for sure, why complicate simple things?) and deleted✔️
-
+  - bonus added toaster messages powered by https://react-hot-toast.com/docs/toast 
 3) Calendar/main planner
   - time to add the calendar ?
   - make it drag and drop for fun (this would require us to make a smaller version of Meal list, with just titles/title + kcal that are visible near the calendar nad can be droped as blocks - but that's just thinking visually, we need to make logic to actually remember what day gets what meals and save this info too because we'll need it in later stages)

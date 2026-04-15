@@ -1,5 +1,7 @@
+import {useState} from 'react'
 import Header from './Header.jsx'
 import AddNewRecipeButton from './AddNewRecipeButton.jsx'
+import SearchBar from './SearchBar.jsx'
 import RecipeList from './RecipeList.jsx'
 import "./styles/RecipeListPage.css"
 import toast, { Toaster } from 'react-hot-toast';
@@ -11,12 +13,16 @@ const notify_delete = () => toast('Recipe deleted.',{
 });
 
 export default function RecipeListPage(){
+    const [recipeFilter, setRecipeFilter] = useState("");
     return(
             <>
             <Header/>
             <section className='recipe-list-body'>
+                <div className='recipe-list-toolbar'>
                 <AddNewRecipeButton/>
-                <RecipeList notifyDelete={notify_delete}/>
+                <SearchBar onSubmit={(value)=>{setRecipeFilter(value)}}/>
+                </div>
+                <RecipeList notifyDelete={notify_delete} recipeListFilter={recipeFilter}/>
             </section>
             <Toaster />
             </>

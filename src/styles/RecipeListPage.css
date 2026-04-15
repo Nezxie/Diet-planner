@@ -1,3 +1,10 @@
 .recipe-list-body{
     margin-left:5em;
+    max-width: 1000px;
+}
+
+.recipe-list-toolbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
