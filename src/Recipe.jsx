@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import {getFoodList,getFoodItemInfo} from './utils/getAPIData.js'
 import RecipeCardEditable from './RecipeCardEditable.jsx'
 import IngredientsSearch from './IngredientsSearch.jsx'
+import "./styles/Recipe.css"
 import {getSavedRecipe, saveRecipeToMemory} from './utils/recipeStorage.js'
 
 export default function Recipe (){
@@ -65,7 +66,7 @@ export default function Recipe (){
     }
 
     return(
-        <>
+        <section className='edit-recipe-body'>
         <IngredientsSearch
         foodList={foodList}
         onSelectProduct={onSelectProduct}
@@ -81,6 +82,6 @@ export default function Recipe (){
         onDiscardRecipe={onDiscardRecipe}
         onSaveRecipe={onSaveRecipe}
         />
-        </>
+        </section>
     );
 }

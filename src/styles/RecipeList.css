@@ -2,14 +2,15 @@
     list-style-type: none;
     padding-left: 0px;
     margin-top:2em;
+    max-width: 1000px;
 }
 
 .recipe-list>li{
     background-color: var(--bg-card-color);
-    padding: 1rem 1.5rem;
+    padding: 1rem 2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    margin:2em;  
+    margin:2em 0em;  
 }
 .action-buttons{
     display: flex;
