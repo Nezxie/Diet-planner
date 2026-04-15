@@ -4,9 +4,9 @@ import {getFoodList,getFoodItemInfo} from './utils/getAPIData.js'
 import RecipeCardEditable from './RecipeCardEditable.jsx'
 import IngredientsSearch from './IngredientsSearch.jsx'
 import "./styles/Recipe.css"
-import {getSavedRecipe, saveRecipeToMemory} from './utils/recipeStorage.js'
+import {getSavedRecipe, saveRecipeToMemory, deleteRecipeFromMemory} from './utils/recipeStorage.js'
 
-export default function Recipe (){
+export default function Recipe ({notifySaved, notifyClear, notifyRestore}){
     let {recipeId} = useParams();
     const [foodList, setFoodList] = useState(null);
     const [recipeIngredients, setRecipeIngredients] = useState([]);
@@ -31,10 +31,20 @@ export default function Recipe (){
     }
 
     function onDiscardRecipe(id){
-        if(confirm("Are you sure you want to discard all the changes?")){ //do this with custom react later maybe
+        if(confirm("Are you sure you want to discard all the changes and restore last save?")){ //do this with custom react later maybe
             let savedRecipe = getSavedRecipe(id);
             setRecipeName(savedRecipe.name||"New recipe");
             setRecipeIngredients(savedRecipe.ingredients||[]);
+            notifyRestore();
+        }
+    }
+
+    function onClearRecipe(id){
+        if(confirm("Are you sure you want to delete this recipe from memory? This action cannot be undone.")){
+            deleteRecipeFromMemory(id)
+            setRecipeName("New recipe");
+            setRecipeIngredients([]);
+            notifyClear();
         }
     }
 
@@ -45,6 +55,7 @@ export default function Recipe (){
             "ingredients":recipeIngredients
         }
         saveRecipeToMemory(newRecipe);
+        notifySaved();
     }
 
     function addToRecipe(item){
@@ -81,6 +92,7 @@ export default function Recipe (){
         onQuantityChange={editIngredientQuantity}
         onDiscardRecipe={onDiscardRecipe}
         onSaveRecipe={onSaveRecipe}
+        onClearRecipe={onClearRecipe}
         />
         </section>
     );

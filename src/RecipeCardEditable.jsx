@@ -1,6 +1,7 @@
 import './styles/RecipeCard.css'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
 import InlineEditable from './InlineEditable.jsx'
 import MacroLabel from './MacroLabel.jsx'
 import {calculateMealMacro, calculateIngredientMacro, getEmptyMeal} from './utils/calculateMacro.js'
@@ -14,7 +15,8 @@ export default function RecipeCardEditable(
         onRemoveIngredient,
         onQuantityChange,
         onSaveRecipe,
-        onDiscardRecipe
+        onDiscardRecipe,
+        onClearRecipe
     }){
 
     let mealMacro = getEmptyMeal();
@@ -73,7 +75,8 @@ export default function RecipeCardEditable(
             </table>:
             <p>Try adding ingredients from the list above to create your recipe.</p>}
             <div className='edit-actions'>
-                <button className='delete-button' onClick={()=>{onDiscardRecipe(recipeId)}}><DeleteOutlinedIcon fontSize="small"/>Clear</button>
+                <button className='delete-button' onClick={()=>{onClearRecipe(recipeId)}}><DeleteOutlinedIcon fontSize="small"/>Delete</button>
+                <button className='restore-button' onClick={()=>{onDiscardRecipe(recipeId)}}><RestoreOutlinedIcon fontSize="small"/>Restore</button>
                 <button className='save-button' onClick={()=>{onSaveRecipe(recipeId)}}><SaveOutlinedIcon fontSize="small"/>Save</button>
             </div>
         </div>

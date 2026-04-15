@@ -39,7 +39,8 @@ nav>a:focus{
 
 .delete-button,
 .save-button,
-.edit-button
+.edit-button,
+.restore-button
 {
   display: inline-flex;
   justify-content: center;
@@ -54,7 +55,8 @@ nav>a:focus{
   color:var(--color-success);
 }
 
-.edit-button{
+.edit-button,
+.restore-button{
   border-color: var(--color-info);
   color:var(--color-info);
 }
@@ -64,6 +66,7 @@ nav>a:focus{
   color:var(--color-destructive);
 }
 
+
 .save-button:hover,
 .save-button:active{
     border-color: var(--color-active-success);
@@ -72,7 +75,9 @@ nav>a:focus{
 }
 
 .edit-button:hover,
-.edit-button:active{
+.edit-button:active,
+.restore-button:hover,
+.restore-button:active{
     border-color: var(--color-active-info);
     background-color: var(--bg-info);
     color:var(--color-active-info);
@@ -83,4 +88,11 @@ nav>a:focus{
     border-color: var(--color-active-destructive);
     background-color: var(--bg-destructive);
     color:var(--color-active-destructive);
+}
+
+.notify_save,
+.notify_delete,
+.notify_restore
+{
+  border-radius: 2px;
 }

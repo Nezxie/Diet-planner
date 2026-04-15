@@ -3,7 +3,7 @@ import {getSavedRecipeList, deleteRecipeFromMemory} from './utils/recipeStorage.
 import './styles/RecipeList.css'
 import RecipeCard from './RecipeCard.jsx'
 
-export default function RecipeList(){
+export default function RecipeList({notifyDelete}){
     const [recipesList, setRecipesList] = useState([])
     
     useEffect(()=>{
@@ -12,6 +12,8 @@ export default function RecipeList(){
 
     function onDeleteRecipe(id){
         setRecipesList(deleteRecipeFromMemory(id));
+        notifyDelete();
+        
     }
 
     return(
