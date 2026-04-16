@@ -13,8 +13,13 @@ export default function PreferencesPage(){
     return(
         <>
         <Header/>
-        <p>Here well have some options user can save like filters and calories and stuff.</p>
-        <button className='save-button' onClick={notify_save}><SaveOutlinedIcon fontSize="small"/>Save settings</button>
+        <div className='app-body'>
+            <p>Here well have some options user can save like filters and calories and stuff.</p>
+            <p>So target calories</p>
+            <p>Export and import recipes via json?</p>
+            <p>How many days in calendar?</p>
+            <button className='save-button' onClick={notify_save}><SaveOutlinedIcon fontSize="small"/>Save settings</button>
+        </div>
         <Toaster />
         </>
     )

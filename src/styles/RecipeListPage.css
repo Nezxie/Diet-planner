@@ -1,15 +1,4 @@
 
-.recipe-list-body{
-    margin:0em 1em;
-}
-
-@media only screen and (min-width: 1000px){
-    .recipe-list-body{
-        margin:0em auto;
-        max-width: 1000px;
-    }
-}
-
 .recipe-list-toolbar{
     display: flex;
     justify-content: space-between;

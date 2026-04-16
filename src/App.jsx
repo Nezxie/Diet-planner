@@ -1,12 +1,15 @@
 import './styles/App.css'
 import Header from './Header.jsx'
+import Calendar from './Calendar.jsx'
 
 function App() {
 
   return (
     <>
       <Header/>
-      <p>here will be the calendar and some fluff info for user</p>
+      <div className='app-body'>
+      <Calendar />
+      </div>
     </>
   )
 }

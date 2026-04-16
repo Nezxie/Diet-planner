@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import {getFoodList,getFoodItemInfo} from './utils/getAPIData.js'
 import RecipeCardEditable from './RecipeCardEditable.jsx'
 import IngredientsSearch from './IngredientsSearch.jsx'
-import "./styles/Recipe.css"
 import {getSavedRecipe, saveRecipeToMemory, deleteRecipeFromMemory} from './utils/recipeStorage.js'
 
 export default function Recipe ({notifySaved, notifyClear, notifyRestore}){
@@ -79,7 +78,7 @@ export default function Recipe ({notifySaved, notifyClear, notifyRestore}){
     }
 
     return(
-        <section className='edit-recipe-body'>
+        <section className='app-body'>
         <IngredientsSearch
         foodList={foodList}
         onSelectProduct={onSelectProduct}

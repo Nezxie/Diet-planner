@@ -1,0 +1,95 @@
+.drawer-title-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-separator-color);
+}
+
+.drawer-title-row .close-button{
+  padding:0px;
+  background-color: rgba(0,0,0,0);
+  color:var(--link-color);
+}
+.drawer-title-row .close-button:hover,
+.drawer-title-row .close-button:active{
+  border-color: rgba(0,0,0,0);
+  color: var(--link-color-active);
+}
+
+body.modal-active {
+  overflow: hidden;
+}
+
+.modal-backdrop {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  z-index: 1000;
+}
+
+.modal-content {
+  height: 100%;
+  width:100%;
+  background: var(--bg-card-color);
+  padding: 0em 2em;
+  transform: translateX(0);
+}
+
+@media only screen and (min-width: 900px) {
+  .modal-content {
+    width:40%;
+  }
+}
+
+/* ===== OPEN ===== */
+.modal-backdrop.modal-opened {
+  animation: backdropFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)  forwards;
+}
+
+.modal-backdrop.modal-opened .modal-content {
+  animation: drawerSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)  forwards;
+}
+
+/* ===== CLOSE ===== */
+.modal-backdrop.modal-closed {
+  animation: backdropFadeOut 0.25s cubic-bezier(0.4, 0, 1, 1)  forwards;
+}
+
+.modal-backdrop.modal-closed .modal-content {
+  animation: drawerSlideOut 0.25s cubic-bezier(0.4, 0, 1, 1)  forwards;
+}
+
+
+@keyframes backdropFadeIn {
+  from { background: rgba(0,0,0,0); }
+  to   { background: rgba(0,0,0,0.5); }
+}
+
+@keyframes backdropFadeOut {
+  from { background: rgba(0,0,0,0.5); }
+  to   { background: rgba(0,0,0,0); }
+}
+
+@keyframes drawerSlideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawerSlideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+

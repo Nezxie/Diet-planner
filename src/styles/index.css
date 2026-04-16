@@ -166,6 +166,18 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.app-body{
+      margin:0em 1em;
+}
+
+@media only screen and (min-width: 1000px){
+    .app-body{
+        margin:0em auto;
+        max-width: 1000px;
+    }
+}
+
+
 @media only screen and (max-width: 900px){
   body{
     font-size: 14px;

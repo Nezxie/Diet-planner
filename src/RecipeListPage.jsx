@@ -17,7 +17,7 @@ export default function RecipeListPage(){
     return(
             <>
             <Header/>
-            <section className='recipe-list-body'>
+            <section className='app-body'>
                 <div className='recipe-list-toolbar'>
                 <AddNewRecipeButton/>
                 <SearchBar onSubmit={(value)=>{setRecipeFilter(value)}}/>
