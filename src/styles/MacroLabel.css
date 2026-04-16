@@ -7,7 +7,7 @@
 .label{
     color:var(---label-text-color);
     font-weight: 500;
-    padding: 7px 15px;
+    padding: .5em 1em;
     border-radius: var(--border-radius);
     margin: 5px;
 }
