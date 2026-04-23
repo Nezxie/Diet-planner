@@ -38,3 +38,8 @@
     margin-top: 1rem;
     border-top: 1px var(--border-separator-color) solid;
 }
+.inline-button-in-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

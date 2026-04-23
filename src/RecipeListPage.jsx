@@ -1,28 +1,36 @@
-import {useState} from 'react'
+import { NavLink } from 'react-router';
+import { Toaster } from 'react-hot-toast';
+import {useRecipes} from './hooks/useRecipes.js'
+import SearchableRecipeList from './SearchableRecipeList.jsx';
 import Header from './Header.jsx'
-import AddNewRecipeButton from './AddNewRecipeButton.jsx'
-import SearchBar from './SearchBar.jsx'
-import RecipeList from './RecipeList.jsx'
+
 import "./styles/RecipeListPage.css"
-import toast, { Toaster } from 'react-hot-toast';
-const notify_delete = () => toast('Recipe deleted.',{
-    duration: 2500,
-    position: 'bottom-right',
-    className: 'notify_delete',
-    icon:'🗑️'
-});
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 export default function RecipeListPage(){
-    const [recipeFilter, setRecipeFilter] = useState("");
+    const {recipesList, deleteRecipe} = useRecipes();
+    
     return(
             <>
             <Header/>
             <section className='app-body'>
-                <div className='recipe-list-toolbar'>
-                <AddNewRecipeButton/>
-                <SearchBar onSubmit={(value)=>{setRecipeFilter(value)}}/>
-                </div>
-                <RecipeList notifyDelete={notify_delete} recipeListFilter={recipeFilter}/>
+                <SearchableRecipeList 
+                    recipes={recipesList} 
+                    recipeActions={(recipe)=>
+                        (
+                            <>
+                            <NavLink className='edit-button button' to={`/recipe/${recipe.id}`}>
+                                <EditOutlinedIcon fontSize="small"/>Edit
+                            </NavLink>
+                            <button className='delete-button' onClick={() => deleteRecipe(recipe)}>
+                                <DeleteOutlinedIcon fontSize="small"/>
+                                Delete
+                            </button>
+                            </>
+                        )
+                    }
+                />
             </section>
             <Toaster />
             </>
