@@ -10,10 +10,16 @@
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     margin:2em 0em;  
+    border-left: 4px solid rgba(0,0,0,0);
 }
 .action-buttons{
     display: flex;
     justify-content: flex-end;
     gap: .5em;
     margin-top: 1em;
+}
+
+.recipe-list>li.selected{
+    border-left: 4px solid #4caf50;
+    background-color: rgba(76, 175, 80, 0.05);
 }

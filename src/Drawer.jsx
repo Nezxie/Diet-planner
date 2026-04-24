@@ -3,7 +3,7 @@ import './styles/Drawer.css'
 import { useState, useEffect } from "react"
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
-export default function Drawer({onClose, children, title, onSave=null}){
+export default function Drawer({onClose, children, title, onSave, saveText=""}){
     const [open, setOpen] = useState(false);
     const [visible, setVisible] = useState(false);
 
@@ -31,8 +31,10 @@ export default function Drawer({onClose, children, title, onSave=null}){
                     <h2>{title}</h2>
                     <button className="close-button" onClick={handleClose}><CloseOutlinedIcon/></button>
                 </div>
-                {children}
-                {onSave&&<button onClick={()=>{onSave();handleClose()}} className="save-button">Save</button>}
+                <div className="drawer-children">
+                    {children}
+               </div>
+                {saveText&&<div className="button-row"><button onClick={()=>{onSave();handleClose()}} className="save-button">{saveText}</button></div>}
             </div>
         </div>,
         document.body

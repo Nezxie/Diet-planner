@@ -27,7 +27,7 @@ export default function RecipeCard({recipe, onCardClick, selected, actions}){
     </>;
 ;
     return(
-        <li key={recipe.id} onClick={onCardClick} className={selected&&"selected"}>
+        <li key={recipe.id} onClick={onCardClick} className={selected?"selected":""}>
             <div className="inline-button-in-header">
                 <h2>{recipe.name}</h2>
                 <button onClick={(e)=>{
