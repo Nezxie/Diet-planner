@@ -55,3 +55,22 @@ export function calculateTotalQuantity(ingredientList){
     let macro = calculateMealMacro(ingredientList);
     return macro.quantity;
 }
+
+export function sumTwoMacros(macroObj1, macroObj2){
+    
+    let energy = macroObj1.nutriens.energy + macroObj2.nutriens.energy;
+    let protein = macroObj1.nutriens.protein + macroObj2.nutriens.protein;
+    let carbs = macroObj1.nutriens.carbs + macroObj2.nutriens.carbs;
+    let fat = macroObj1.nutriens.fat + macroObj2.nutriens.fat;
+    let quantity = macroObj1.quantity + macroObj2.quantity
+    
+    return {
+        'nutriens':{
+            'energy':Math.round(energy),
+            'protein':Math.round(protein),
+            'carbs':Math.round(carbs),
+            'fat':Math.round(fat)
+        },
+        'quantity':Math.round(quantity)
+    }
+}

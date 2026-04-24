@@ -21,7 +21,7 @@ export default function RecipeCard({recipe, onCardClick, selected, actions}){
                     return(<li key={ingredient.id}>{ingredient.name}: {ingredient.quantity}g</li>)
                 })
                 :
-                <p>No ingredients found - try edditing the recipe.</p>
+                <p>No ingredients found - try editing the recipe.</p>
             }
         </ul>    
     </>;

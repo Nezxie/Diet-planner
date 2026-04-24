@@ -128,4 +128,10 @@ export function clearDayInMealPlan(dayId){
     return updatedMealPlan;
 }
 
-/*write a convert recipeId to a full recipe data for calculations or maybe do the calculations too? idk, maybe i already have everything i need, im tired */
+/*
+write a convert recipeId to a full recipe data for calculations
+    > we have already, it's getSavedRecipe(id)
+or maybe do the calculations too
+    > we have that in calculateMacro.js
+    calculateMealMacro(ingredientList) and run that for each meal then sumTwoMacros(macroObj1, macroObj2)
+*/

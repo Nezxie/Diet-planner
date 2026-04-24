@@ -11,7 +11,6 @@ export default function SearchableRecipeList({recipes, recipeActions, onItemClic
     return(
         <>
         <div className='recipe-list-toolbar'>
-            <AddNewRecipeButton/>
             <SearchBar onSubmit={(value)=>{setRecipeFilter(value)}}/>
         </div>
         <RecipeList recipesList={filteredRecipes} recipeActions={recipeActions} onItemClick={onItemClick} selectedIds={selectedIds}/>
