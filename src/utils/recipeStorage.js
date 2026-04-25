@@ -57,16 +57,10 @@ export function deleteRecipeFromMemory(id){
 //MEAL PLAN FUNCTIONS
 /*
 MEAL DATA STRUCTURE:
-[
-    {
-        day_id:0,
-        recipeIds:[id1, id2, id3]
-    },
-    {
-        day_id:2,
-        recipeIds:[id1, id1]
-    }
-]
+    [
+        ["id1", "id2", "id3"]
+        ["id1", "id1"]
+    ]
 */
 
 export function getMealPlansList(){
@@ -74,58 +68,50 @@ export function getMealPlansList(){
 }
 export function getDayOfMealPlan(dayId){
     let mealPlan = getMealPlansList();
-    if(!mealPlan)
-        return {};
-    return mealPlan.find(mp => mp.dayId === dayId)||{}
+    return mealPlan[dayId]||[];
 }
 
-export function saveToMealPlan(dayId, recipeIds){
+export function saveToMealPlan(dayId, recipeIds, maxDays){
     let mealPlan = getMealPlansList();
-    let exists = false;
-    const updatedMealPlan = mealPlan.map((day)=>{
-        if(day.dayId != dayId) return day;
-        exists = true;
-        return {
-            ...day,
-            recipeIds:[...day.recipeIds, ...recipeIds]
-        }
-    })
-    if(!exists){
-        updatedMealPlan.push({
-            "dayId":dayId,
-            "recipeIds":recipeIds
-        })
+    if (dayId < 0 || dayId >= maxDays) {
+        console.warn("Invalid dayId:", dayId);
+        return mealPlan;
     }
-    setList(updatedMealPlan,MEAL_PLAN_KEY)
+
+    if(mealPlan[dayId]){
+        mealPlan[dayId].push(...recipeIds);
+    }
+    else{
+        mealPlan[dayId]=[...recipeIds];
+    }
+    setList(mealPlan,MEAL_PLAN_KEY);
+    return mealPlan;
 }
 
 export function removeFromMealPlan(dayId,recipeId){
     let mealPlan = getMealPlansList();
-    let updatedMealPlan = mealPlan.map((day)=>{
-        if(day.dayId !== dayId){
-            return day;
+    if(mealPlan[dayId]){
+        let recipeIndex = mealPlan[dayId].lastIndexOf(recipeId);
+        if(recipeIndex === -1){
+            console.warn(`Recipe with id: ${recipeId} not found in meal plan for day ${dayId}`);
+            return mealPlan;
         }
-        return {
-            ...day,
-            recipeIds:day.recipeIds.filter((id) => id!==recipeId)
-        }
-    });
-    setList(updatedMealPlan,MEAL_PLAN_KEY)
-    return updatedMealPlan;
+        mealPlan[dayId].splice(recipeIndex,1);
+        
+        setList(mealPlan,MEAL_PLAN_KEY)
+    }
+    return mealPlan;
 }
 
 export function clearDayInMealPlan(dayId){
     let mealPlan = getMealPlansList();
-    let updatedMealPlan = mealPlan.map((day) => {
-        if(day.dayId !== dayId) return day;
-        return {
-            "dayId":dayId,
-            "recipeIds":[]
-        }
-    });
-        
-    setList(updatedMealPlan,MEAL_PLAN_KEY)
-    return updatedMealPlan;
+    if (dayId < 0 || dayId >= mealPlan.length)
+        return mealPlan;
+
+    mealPlan.splice(dayId,1);
+           
+    setList(mealPlan,MEAL_PLAN_KEY)
+    return mealPlan;
 }
 
 /*

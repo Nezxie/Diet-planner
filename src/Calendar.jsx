@@ -1,8 +1,10 @@
 import {useState} from 'react'
 import Drawer from './Drawer'
+import CalendarDay from './CalendarDay.jsx';
 import RecipeSelectionList from './RecipeSelectionList';
 import toast, { Toaster } from 'react-hot-toast';
-import {getMealPlansList, saveToMealPlan, clearDayInMealPlan} from './utils/recipeStorage.js'
+import {getMealPlansList, saveToMealPlan, clearDayInMealPlan, getDayOfMealPlan, getSavedRecipe, removeFromMealPlan} from './utils/recipeStorage.js'
+import './styles/Calendar.css'
 
 const notify_save = () => toast('Recipe added to the schedule.',{
     duration: 2500,
@@ -14,17 +16,10 @@ const notify_save = () => toast('Recipe added to the schedule.',{
 export default function Calendar(){
     const [showModal, setShowModal] = useState(false);
     const [selectedIds, setSelectedIds] = useState([]);
-    const dayId = 1; //where does that live ;-; <- don't cry this will be state when user selects a day to edit i guess, we'll move this to a Day  component or something
-
-    function test1(){
-        console.log("Saved meal plan:");
-        console.log(getMealPlansList());
-    }
-
-     function test2(){
-        console.log("Cleared meal plan day 1:");
-        console.log(clearDayInMealPlan(dayId));
-    }
+    const [mealPlanData, setMealPlanData] = useState(getMealPlansList())
+    const [activeDayId, setActiveDayId] = useState(null);
+    const [daysCount, setDaysCount] = useState(0); //this we can set in use settings so it defaults to a preffered number
+    const maxDays = 7; //a week has 7 days + ui vibes
 
     function onSelectRecipe(recipeId){
             let newSelectedIds;
@@ -38,17 +33,54 @@ export default function Calendar(){
     }
 
     function saveRecipe(){
-        saveToMealPlan(dayId, selectedIds);
+        let newMealPlan = saveToMealPlan(activeDayId, selectedIds, maxDays);
+        setMealPlanData(newMealPlan);
         notify_save();
         setSelectedIds([]);
     }
 
+    function onEditDay(dayId){
+        setActiveDayId(dayId);
+        setShowModal(true);
+    }
+
+    function addDay(){
+        setDaysCount(daysCount => daysCount+1)
+    }
+    function removeDay(dayId){
+        clearDayInMealPlan(dayId);
+        setDaysCount(daysCount => daysCount-1);
+    }
+
+    function removeMeal(dayId,recipeId){
+        let newMealPlan = removeFromMealPlan(dayId,recipeId);
+        setMealPlanData(newMealPlan);
+    }
+
+    const getDayData = (dayId) => {
+        return (mealPlanData[dayId] || []).map(getSavedRecipe);
+    };
+
     return(
         <>
-        <button onClick={() => setShowModal(true)}>Show drawer</button>
-        <button onClick={test1}>Get meal plan</button>
-        <button onClick={test2}>Clear meal plan</button>
-
+        <div className='calendar-days-area'>
+            {
+            daysCount>0?
+            Array.from({length:daysCount},(item, index)=>{
+                return <CalendarDay 
+                key={index} 
+                dayId={index} 
+                onEditDay={()=>{onEditDay(index)}} 
+                onRemoveDay={()=>{removeDay(index)}} 
+                recipes={getDayData(index)} 
+                onRemoveMeal={(recipeId)=>{removeMeal(index,recipeId)}}/>
+            })
+            :
+            <p>Add a new day to start planing.</p>
+        }
+        </div>
+        <button onClick={addDay} disabled={daysCount>6}>Add day</button>
+        
         {showModal && <Drawer onClose={() => setShowModal(false)} title={"Select a meal"} onSave={saveRecipe} saveText={selectedIds.length>0?`Add ${selectedIds.length} to meal plan`:""}>
             <RecipeSelectionList selectedIds={selectedIds} onSelectRecipe={onSelectRecipe}/>
             </Drawer>

@@ -1,0 +1,14 @@
+.calendar-day{
+    .title-row{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;   
+        }
+        .inline-button{
+            padding: .1em .4em;
+            margin-left: 1.5em;
+        }
+}
+.recipes-list{
+    margin:1em 0em;
+}
