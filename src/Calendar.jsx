@@ -3,7 +3,14 @@ import Drawer from './Drawer'
 import CalendarDay from './CalendarDay.jsx';
 import RecipeSelectionList from './RecipeSelectionList';
 import toast, { Toaster } from 'react-hot-toast';
-import {getMealPlansList, saveToMealPlan, clearDayInMealPlan, getDayOfMealPlan, getSavedRecipe, removeFromMealPlan} from './utils/recipeStorage.js'
+import {
+    getMealPlansList, 
+    saveToMealPlan, 
+    clearDayInMealPlan, 
+    getSavedRecipe, 
+    removeFromMealPlan,
+    addDayToMealPlan,
+    removeDayFromMealPlan } from './utils/recipeStorage.js'
 import './styles/Calendar.css'
 
 const notify_save = () => toast('Recipe added to the schedule.',{
@@ -18,7 +25,6 @@ export default function Calendar(){
     const [selectedIds, setSelectedIds] = useState([]);
     const [mealPlanData, setMealPlanData] = useState(getMealPlansList())
     const [activeDayId, setActiveDayId] = useState(null);
-    const [daysCount, setDaysCount] = useState(0); //this we can set in use settings so it defaults to a preffered number
     const maxDays = 7; //a week has 7 days + ui vibes
 
     function onSelectRecipe(recipeId){
@@ -45,41 +51,45 @@ export default function Calendar(){
     }
 
     function addDay(){
-        setDaysCount(daysCount => daysCount+1)
-    }
-    function removeDay(dayId){
-        clearDayInMealPlan(dayId);
-        setDaysCount(daysCount => daysCount-1);
+        const mealPlan = addDayToMealPlan();
+        setMealPlanData(mealPlan);
     }
 
-    function removeMeal(dayId,recipeId){
-        let newMealPlan = removeFromMealPlan(dayId,recipeId);
+    function removeDay(dayId){
+        let newMealPlan = removeDayFromMealPlan(dayId);
         setMealPlanData(newMealPlan);
     }
 
-    const getDayData = (dayId) => {
-        return (mealPlanData[dayId] || []).map(getSavedRecipe);
-    };
+    function clearDay(dayId){
+        let newMealPlan = clearDayInMealPlan(dayId);
+        setMealPlanData(newMealPlan);
+    }
 
+    function removeMeal(dayId, recipeId, position){
+        let newMealPlan = removeFromMealPlan(dayId,recipeId,position);
+        setMealPlanData(newMealPlan);
+    }
     return(
         <>
         <div className='calendar-days-area'>
             {
-            daysCount>0?
-            Array.from({length:daysCount},(item, index)=>{
-                return <CalendarDay 
-                key={index} 
-                dayId={index} 
-                onEditDay={()=>{onEditDay(index)}} 
-                onRemoveDay={()=>{removeDay(index)}} 
-                recipes={getDayData(index)} 
-                onRemoveMeal={(recipeId)=>{removeMeal(index,recipeId)}}/>
-            })
+            mealPlanData.length>0?
+                mealPlanData.map((day,index)=>{
+                    return <CalendarDay 
+                    key={day.id}
+                    position = {index} 
+                    dayId={day.id} 
+                    onEditDay={()=>{onEditDay(day.id)}} 
+                    onRemoveDay={()=>{removeDay(day.id)}} 
+                    recipes={day.recipeIds.map(getSavedRecipe)} 
+                    onRemoveMeal={(recipeId, position)=>{removeMeal(day.id,recipeId,position)}}/>
+                })
+            // })
             :
             <p>Add a new day to start planing.</p>
         }
         </div>
-        <button onClick={addDay} disabled={daysCount>6}>Add day</button>
+        <button onClick={addDay} disabled={mealPlanData.length>6}>Add day</button>
         
         {showModal && <Drawer onClose={() => setShowModal(false)} title={"Select a meal"} onSave={saveRecipe} saveText={selectedIds.length>0?`Add ${selectedIds.length} to meal plan`:""}>
             <RecipeSelectionList selectedIds={selectedIds} onSelectRecipe={onSelectRecipe}/>
