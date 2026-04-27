@@ -72,19 +72,23 @@ MEAL DATA STRUCTURE:
 }
 */
 
-export function getMealPlansList(){
-    return getList(MEAL_PLAN_KEY)||[];
+export function getMealPlansList(maxDays = 7){
+    const list = getList(MEAL_PLAN_KEY)||[];
+    return list.slice(0,maxDays).map(day=>({
+        ...day,
+        recipeIds: day.recipeIds??[] // data normalization
+    }))
 }
 
-export function getDayOfMealPlan(dayId){
-    let mealPlan = getMealPlansList();
+export function getDayOfMealPlan(dayId, maxDays = 7){
+    let mealPlan = getMealPlansList(maxDays);
     if(!mealPlan)
         return {};
     return mealPlan.find(day => day.id === dayId)||{}
 }
 
-export function saveToMealPlan(dayId, recipeIds){
-    let mealPlan = getMealPlansList();
+export function saveToMealPlan(dayId, recipeIds, maxDays = 7){
+    let mealPlan = getMealPlansList(maxDays);
     const updatedMealPlan = mealPlan.map((day)=>{
         if(day.id != dayId) return day;
         return {
@@ -96,8 +100,8 @@ export function saveToMealPlan(dayId, recipeIds){
     return updatedMealPlan;
 }
 
-export function addDayToMealPlan(){
-    const mealPlan = getMealPlansList();
+export function addDayToMealPlan(maxDays = 7){
+    const mealPlan = getMealPlansList(maxDays);
     const newDay = {
         id:uuidv4(),
         recipeIds:[]
@@ -107,15 +111,15 @@ export function addDayToMealPlan(){
     return updatedMealPlan;
 }
 
-export function removeDayFromMealPlan(dayId){
-    const mealPlan = getMealPlansList();
+export function removeDayFromMealPlan(dayId, maxDays = 7){
+    const mealPlan = getMealPlansList(maxDays);
     const updatedMealPlan = mealPlan.filter(day=>day.id!==dayId)
     setList(updatedMealPlan, MEAL_PLAN_KEY);
     return updatedMealPlan;
 }
 
-export function removeFromMealPlan(dayId,recipeId,recipePosition){
-    let mealPlan = getMealPlansList();
+export function removeFromMealPlan(dayId,recipeId,recipePosition, maxDays = 7){
+    let mealPlan = getMealPlansList(maxDays);
     let updatedMealPlan = mealPlan.map((day)=>{
         if(day.id !== dayId){
             return day;
@@ -131,8 +135,8 @@ export function removeFromMealPlan(dayId,recipeId,recipePosition){
     return updatedMealPlan;
 }
 
-export function clearDayInMealPlan(dayId){
-    let mealPlan = getMealPlansList();
+export function clearDayInMealPlan(dayId, maxDays = 7){
+    let mealPlan = getMealPlansList(maxDays);
     let updatedMealPlan = mealPlan.map((day) => {
         if(day.id !== dayId) return day;
         return {
@@ -144,74 +148,3 @@ export function clearDayInMealPlan(dayId){
     setList(updatedMealPlan,MEAL_PLAN_KEY)
     return updatedMealPlan;
 }
-
-
-//MEAL PLAN FUNCTIONS
-/*
-MEAL DATA STRUCTURE:
-    [
-        ["id1", "id2", "id3"]
-        ["id1", "id1"]
-    ]
-*/
-/* we switch back to objects because i hate myself
-
-export function getMealPlansList(maxDays = 7){
-    const list = getList(MEAL_PLAN_KEY)||[];
-    return list.slice(0,maxDays);
-}
-export function getDayOfMealPlan(dayId){
-    let mealPlan = getMealPlansList();
-    return mealPlan[dayId]||[];
-}
-
-export function saveToMealPlan(dayId, recipeIds, maxDays){
-    let mealPlan = getMealPlansList(maxDays);
-    if (dayId < 0 || dayId >= maxDays) {
-        console.warn("Invalid dayId:", dayId);
-        return mealPlan;
-    }
-
-    if(mealPlan[dayId]){
-        mealPlan[dayId].push(...recipeIds);
-    }
-    else{
-        mealPlan[dayId]=[...recipeIds];
-    }
-    setList(mealPlan,MEAL_PLAN_KEY);
-    return mealPlan;
-}
-
-export function removeFromMealPlan(dayId,recipeId){
-    let mealPlan = getMealPlansList();
-    if(mealPlan[dayId]){
-        let recipeIndex = mealPlan[dayId].lastIndexOf(recipeId);
-        if(recipeIndex === -1){
-            console.warn(`Recipe with id: ${recipeId} not found in meal plan for day ${dayId}`);
-            return mealPlan;
-        }
-        mealPlan[dayId].splice(recipeIndex,1);
-        
-        setList(mealPlan,MEAL_PLAN_KEY)
-    }
-    return mealPlan;
-}
-
-export function clearDayInMealPlan(dayId){
-    let mealPlan = getMealPlansList();
-    if (dayId < 0 || dayId >= mealPlan.length)
-        return mealPlan;
-
-    mealPlan.splice(dayId,1);
-           
-    setList(mealPlan,MEAL_PLAN_KEY)
-    return mealPlan;
-}
-*/
-/*
-write a convert recipeId to a full recipe data for calculations
-    > we have already, it's getSavedRecipe(id)
-or maybe do the calculations too
-    > we have that in calculateMacro.js
-    calculateMealMacro(ingredientList) and run that for each meal then sumTwoMacros(macroObj1, macroObj2)
-*/

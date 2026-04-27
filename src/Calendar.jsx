@@ -51,8 +51,10 @@ export default function Calendar(){
     }
 
     function addDay(){
-        const mealPlan = addDayToMealPlan();
-        setMealPlanData(mealPlan);
+        if(mealPlanData.length < maxDays){
+            const mealPlan = addDayToMealPlan();
+            setMealPlanData(mealPlan);
+        }
     }
 
     function removeDay(dayId){
@@ -89,7 +91,7 @@ export default function Calendar(){
             <p>Add a new day to start planing.</p>
         }
         </div>
-        <button onClick={addDay} disabled={mealPlanData.length>6}>Add day</button>
+        <button onClick={addDay} disabled={mealPlanData.length>=maxDays}>Add day</button>
         
         {showModal && <Drawer onClose={() => setShowModal(false)} title={"Select a meal"} onSave={saveRecipe} saveText={selectedIds.length>0?`Add ${selectedIds.length} to meal plan`:""}>
             <RecipeSelectionList selectedIds={selectedIds} onSelectRecipe={onSelectRecipe}/>
