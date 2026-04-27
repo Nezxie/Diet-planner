@@ -1,3 +1,5 @@
 .calendar-days-area{
     display:flex;
+    gap: 1em;
+    margin-bottom: 1em;
 }

@@ -61,6 +61,9 @@
   --label-bg-color-carbs: #8a6835;
   --label-bg-color-fats: #526b7d;
 
+   /*calendar */
+  --bg-calendar-title:#4e5a4f;
+
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -119,6 +122,9 @@
   --label-bg-color-protein: #f2cfc3;
   --label-bg-color-carbs: #f2ddbc;
   --label-bg-color-fats: #cddbe5;
+
+  /*calendar*/
+  --bg-calendar-title:#C7D9C8;
   }
 
   }
