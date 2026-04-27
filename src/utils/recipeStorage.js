@@ -14,7 +14,7 @@ function deleteList(key){
     localStorage.removeItem(key); 
 }
 
-export function makeNewRecipeId(){
+export function makeNewId(){
   return uuidv4();
 }
 
@@ -103,7 +103,7 @@ export function saveToMealPlan(dayId, recipeIds, maxDays = 7){
 export function addDayToMealPlan(maxDays = 7){
     const mealPlan = getMealPlansList(maxDays);
     const newDay = {
-        id:uuidv4(),
+        id:makeNewId(),
         recipeIds:[]
     }
     const updatedMealPlan = [...mealPlan, newDay];

@@ -16,7 +16,8 @@ export default function RecipeCardEditable(
         onQuantityChange,
         onSaveRecipe,
         onDiscardRecipe,
-        onClearRecipe
+        onClearRecipe,
+        titleResetKey
     }){
 
     let mealMacro = getEmptyMeal();
@@ -53,6 +54,7 @@ export default function RecipeCardEditable(
         <div className="recipe-card">
             <InlineEditable
                 value={recipeName}
+                resetKey = {titleResetKey}
                 onSave={(newValue)=>{setRecipeName(newValue)}}
                 displayAs={"h2"}
                 type={"text"}

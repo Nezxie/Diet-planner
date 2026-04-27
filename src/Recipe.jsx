@@ -3,20 +3,27 @@ import { useParams } from "react-router";
 import {getFoodList,getFoodItemInfo} from './utils/getAPIData.js'
 import RecipeCardEditable from './RecipeCardEditable.jsx'
 import IngredientsSearch from './IngredientsSearch.jsx'
-import {getSavedRecipe, saveRecipeToMemory, deleteRecipeFromMemory} from './utils/recipeStorage.js'
+import {getSavedRecipe, saveRecipeToMemory, deleteRecipeFromMemory, makeNewId} from './utils/recipeStorage.js'
 
 export default function Recipe ({notifySaved, notifyClear, notifyRestore}){
     let {recipeId} = useParams();
     const [foodList, setFoodList] = useState(null);
     const [recipeIngredients, setRecipeIngredients] = useState([]);
     const [recipeName, setRecipeName] = useState("New recipe");
+    const [titleResetKey, setTitleResetKey] = useState(recipeId);
 
     useEffect(()=>{
-        let recipe = getSavedRecipe(recipeId);
+        let recipe = getSavedRecipe(recipeId)||{};
         if(Object.keys(recipe).length !== 0){
             setRecipeIngredients(recipe.ingredients);
             setRecipeName(recipe.name);
         }
+        else{
+            setRecipeIngredients([]);
+            setRecipeName("New recipe");
+            setFoodList(null);
+        }
+        setTitleResetKey(recipeId);
     },[recipeId])
 
     async function onIngredientSearch(query){
@@ -36,6 +43,7 @@ export default function Recipe ({notifySaved, notifyClear, notifyRestore}){
             let savedRecipe = getSavedRecipe(id);
             setRecipeName(savedRecipe.name||"New recipe");
             setRecipeIngredients(savedRecipe.ingredients||[]);
+            setTitleResetKey(makeNewId());
             notifyRestore();
         //}
     }
@@ -73,8 +81,7 @@ export default function Recipe ({notifySaved, notifyClear, notifyRestore}){
     }
 
     function editIngredientQuantity(id, newValue){
-       let newIngredients=prev=>prev.map(item=> item.id === id?{...item,quantity:newValue}:item);
-       setRecipeIngredients(newIngredients);
+       setRecipeIngredients(prev=>prev.map(item=> item.id === id?{...item,quantity:newValue}:item));
     }
 
     return(
@@ -89,6 +96,7 @@ export default function Recipe ({notifySaved, notifyClear, notifyRestore}){
         onRemoveIngredient={removeFromRecipe}
         recipeId={recipeId}
         recipeName={recipeName}
+        titleResetKey={titleResetKey}
         setRecipeName={setRecipeName}
         onQuantityChange={editIngredientQuantity}
         onDiscardRecipe={onDiscardRecipe}

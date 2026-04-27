@@ -1,4 +1,4 @@
-import {useState, useId} from 'react'
+import {useState, useId, useEffect} from 'react'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import './styles/InlineEditable.css'
@@ -20,10 +20,15 @@ function validateInput(inputType,inputValue,placeholder){
     }
 }
 
-export default function InlineEditable({value,onSave,placeholder="Untitled", className="", displayAs="p", editAs="input", type="text"}){
+export default function InlineEditable({value,onSave,placeholder="Untitled", className="", displayAs="p", editAs="input", type="text",resetKey}){
     const [isEditing, setIsEditing] = useState(false);
     const [draftValue, setDraftValue] = useState(value);
-    const id = useId()
+    const id = useId();
+    
+    useEffect(() => {
+        setDraftValue(value);
+        setIsEditing(false);
+    }, [resetKey,value]);
 
     function handleSubmit(){
         let newValue = validateInput(type,draftValue,placeholder)
