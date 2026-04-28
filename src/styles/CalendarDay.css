@@ -1,9 +1,8 @@
 .calendar-day{
     box-shadow: var(--box-shadow);
     height: fit-content;
-    /*idk
+      /*idk
     border: solid 1px var(--border-separator-color);
-    flex-grow: 1;
     */
     .calendar-title-row{
             display: flex;
@@ -29,6 +28,11 @@
     }
     button:not(.inline-button){
         width: 100%;
+        background-color: var(--bg-calendar-button);
+    }
+    button:not(.inline-button):hover,
+    button:not(.inline-button):active{
+      background-color: var(--bg-calendar-button-active);  
     }
     .recipes-list{
         margin:0px;

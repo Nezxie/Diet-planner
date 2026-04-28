@@ -31,7 +31,7 @@
   --color-info: #9ea6eb;
   --color-active-destructive:#3e0d0d;
   --color-active-success:#0e3b2c;
-   --color-active-info:#0d123e;
+  --color-active-info:#0d123e;
 
   /*buttons and links*/
 
@@ -63,6 +63,8 @@
 
    /*calendar */
   --bg-calendar-title:#4e5a4f;
+  --bg-calendar-button:#000000;
+  --bg-calendar-button-active:#1a1a1a;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -125,6 +127,8 @@
 
   /*calendar*/
   --bg-calendar-title:#C7D9C8;
+  --bg-calendar-button:#D9CFC7;
+  --bg-calendar-button-active:#C9B59C;
   }
 
   }
