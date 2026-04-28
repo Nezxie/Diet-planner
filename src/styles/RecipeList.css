@@ -23,3 +23,12 @@
     border-left: 4px solid #4caf50;
     background-color: rgba(76, 175, 80, 0.05);
 }
+
+.empty-recipe-list{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--bg-card-color);
+    padding: 2em;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+}
