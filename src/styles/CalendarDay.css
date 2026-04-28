@@ -1,28 +1,49 @@
 .calendar-day{
     box-shadow: var(--box-shadow);
     height: fit-content;
-      /*idk
-    border: solid 1px var(--border-separator-color);
-    */
+
+    h2{
+        margin:.5em 0px;
+    }
+    .labels{
+            gap:5px;
+        }
+        .labels>.label{
+            font-size: .8em;
+            padding: .2em .3em;
+            margin:0px 0px 10px 0px;
+        }
+    .recipe-card>.labels {
+        border-bottom: none;
+        margin-bottom: 0px;
+        padding-bottom: 0px; 
+        &>.label{
+            font-weight:300;
+        }
+    }   
+
     .calendar-title-row{
+        padding: 0px 1em;
+        background-color: var(--bg-calendar-title); 
+        .title-row{
             display: flex;
             justify-content: space-between;
             align-items: center;  
-            padding: 0px 1em;
-            background-color: var(--bg-calendar-title); 
         }
-        .inline-button{
-            padding: .1em .4em;
-            margin-left: 1.5em;
-            background-color: transparent;
-            border: none;
-            color:var(--text-color);
-            opacity: 0.5;
-        }
-         .inline-button:hover,
-         .inline-button:active{
-            opacity: 1;
-         }
+        
+    }
+    .inline-button{
+        padding: .1em .4em;
+        margin-left: 1.5em;
+        background-color: transparent;
+        border: none;
+        color:var(--text-color);
+        opacity: 0.5;
+    }
+    .inline-button:hover,
+    .inline-button:active{
+        opacity: 1;
+    }
     button{
         border-radius: 0px;
     }
@@ -39,9 +60,5 @@
     }
     .recipe-card.recipe-card-small{
         margin: .5em;
-        /* border-radius: 0px;
-        box-shadow: unset;
-        margin:0px;
-        border-bottom:solid 1px var( --border-separator-color); */
     }
 }

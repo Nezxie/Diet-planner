@@ -186,7 +186,7 @@ button:focus-visible {
 @media only screen and (min-width: 1000px){
     .app-body{
         margin:0em auto;
-        max-width: 1000px;
+        max-width: 1200px;
     }
 }
 
