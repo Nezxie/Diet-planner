@@ -27,6 +27,9 @@
     button{
         border-radius: 0px;
     }
+    button:not(.inline-button){
+        width: 100%;
+    }
     .recipes-list{
         margin:0px;
     }

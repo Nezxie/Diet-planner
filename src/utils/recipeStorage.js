@@ -74,10 +74,23 @@ MEAL DATA STRUCTURE:
 
 export function getMealPlansList(maxDays = 7){
     const list = getList(MEAL_PLAN_KEY)||[];
-    return list.slice(0,maxDays).map(day=>({
+    const normalizedList = list.slice(0,maxDays).map(day=>({
         ...day,
         recipeIds: day.recipeIds??[] // data normalization
     }))
+    const validatedList = removeInvalidRecipesFromMealPlan(normalizedList);
+    return validatedList;
+}
+
+function removeInvalidRecipesFromMealPlan(mealPlan){
+    const validatedMealPlan = mealPlan.map((day)=>{
+        const validRecipeIds = day.recipeIds.filter(recipeId=>Object.keys(getSavedRecipe(recipeId)).length !== 0);
+        return ({
+            ...day,
+            recipeIds: validRecipeIds
+        })
+    });
+    return validatedMealPlan;
 }
 
 export function getDayOfMealPlan(dayId, maxDays = 7){
