@@ -15,12 +15,26 @@ const filePickerOpts = {
 };
 
 export async function getFile(){
+  if (window.showOpenFilePicker){
     [fileHandle] = await window.showOpenFilePicker(filePickerOpts);
     if(!fileHandle)
         return;
     const fileData = await fileHandle.getFile();
     const content = await fileData.text()
     return content;
+  }
+  else{
+    const content = new Promise((resolve)=>{
+      const input = document.createElement("input");
+      input.type = "file";
+      input.onchange = async (e)=>{
+        const fileData = e.target.files[0];
+        resolve(await fileData.text());
+      }
+      input.click();
+    })
+    return content;
+  }
 }
 
 export function triggerDownloadJSONFile(data){
