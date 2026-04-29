@@ -1,0 +1,9 @@
+.function-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.function-button{
+    margin-bottom: 1em;
+}

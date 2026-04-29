@@ -1,4 +1,7 @@
+import { createElement } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import {triggerDownloadJSONFile} from './fileUtils.js'
+
 const RECIPES_KEY = "recipes";
 const MEAL_PLAN_KEY = "mealplan"
 
@@ -16,6 +19,22 @@ function deleteList(key){
 
 export function makeNewId(){
   return uuidv4();
+}
+
+export function downloadRecipeListData(){
+    const data = getSavedRecipeList();
+    triggerDownloadJSONFile(data);
+}
+
+export function importRecipeListData(fileContent){
+    try{
+        const parsed = JSON.parse(fileContent);
+        setList(parsed,RECIPES_KEY); 
+    }
+    catch(e){
+        localStorage.setItem(RECIPES_KEY,fileContent)
+    }
+    return fileContent;
 }
 
 //RECIPES FUNCTIONS
