@@ -43,3 +43,68 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.ingredients-table>tbody>tr>td>.labels,
+.product-list>li>.labels{
+    gap:5px;
+}
+.ingredients-table>tbody>tr>td>.labels>.label,
+.product-list>li>.labels>.label{
+    font-size: .8em;
+    padding: .3em .4em;
+    margin:0px 0px 10px 0px;
+}
+
+@media only screen and (max-width: 700px) {
+
+    .ingredients-table{
+        table, thead, tbody, th, td, tr { 
+            display: block; 
+        }
+        thead tr { 
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+	    }
+	    tr {
+            box-shadow: var(--box-shadow-single-bottom);
+            border-radius: var(--border-radius);
+            padding:.5em .5em 0px .5em;
+            margin-bottom: 1em; 
+        }
+
+        td { 
+		border: none;
+		position: relative;
+		padding-left: 50%;
+        padding-right: 2%; 
+        display: flex;
+        justify-content: flex-end;
+            p{
+              margin:0px;  
+            }
+	    }
+        td:before { 
+            position: absolute;
+            top: 6px;
+            left: 2%;
+            width: 40%; 
+            padding-right: 10px; 
+            white-space: nowrap;
+        }
+
+        td:nth-of-type(4){
+            padding-left: 2%;
+        }
+        .delete-button{
+            width: 100%;
+        }
+        button>.MuiSvgIcon-fontSizeSmall,
+        button>.MuiSvgIcon-fontSizeMedium{
+            font-size:1.5em;
+        }
+        td:nth-of-type(1):before { content: "Name"; }
+        td:nth-of-type(2):before { content: "Macro"; }
+        td:nth-of-type(3):before { content: "Quantity (g)"; }
+    }
+}
