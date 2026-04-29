@@ -23,7 +23,7 @@ export function makeNewId(){
 
 export function downloadRecipeListData(){
     const data = getSavedRecipeList();
-    triggerDownloadJSONFile(data);
+    triggerDownloadJSONFile(data,"recipe-list-export");
 }
 
 export function importRecipeListData(fileContent){
@@ -179,4 +179,28 @@ export function clearDayInMealPlan(dayId, maxDays = 7){
         
     setList(updatedMealPlan,MEAL_PLAN_KEY)
     return updatedMealPlan;
+}
+
+function getArrayOfAllIngredientsFromMealPlan(mealPlan){
+    const recipes = mealPlan.flatMap((day,index)=>{
+        return day.recipeIds.map(getSavedRecipe)
+    })
+    const ingredients = recipes.flatMap((recipe)=>recipe.ingredients);
+    const merged = ingredients.reduce((acc,ingredient)=>{
+        const key = ingredient.name.toLowerCase().trim();
+        if(!acc[key]){
+            acc[key]={...ingredient}
+        }
+        else{
+            acc[key].quantity += ingredient.quantity;
+        }
+        return acc;
+    },{})
+    return Object.values(merged);
+}
+
+export function composeGroceryList(mealPlan){
+    const ingredients = getArrayOfAllIngredientsFromMealPlan(mealPlan);
+    const groceryList = ingredients.map(item=>`[] ${item.name} - ${item.quantity} g`).join("\n");
+    return groceryList;
 }

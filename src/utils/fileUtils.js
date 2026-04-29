@@ -37,16 +37,27 @@ export async function getFile(){
   }
 }
 
-export function triggerDownloadJSONFile(data){
+export function triggerDownloadJSONFile(data, name){
     const jsonString = JSON.stringify(data);
     const blob = new Blob([jsonString],{ type: "application/json" })
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download="recipe-list-export.json";
+    link.download=`${name}.json`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 }
 
+export function triggerDownloadTXTFile(data, name){
+    const blob = new Blob([data],{ type: "text/plain" })
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download=`${name}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}

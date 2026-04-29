@@ -10,7 +10,9 @@ import {
     getSavedRecipe, 
     removeFromMealPlan,
     addDayToMealPlan,
-    removeDayFromMealPlan } from './utils/recipeStorage.js'
+    removeDayFromMealPlan,
+    composeGroceryList } from './utils/recipeStorage.js'
+import {triggerDownloadTXTFile} from './utils/fileUtils.js'    
 import './styles/Calendar.css'
 
 const notify_save = () => toast('Recipe added to the schedule.',{
@@ -71,6 +73,11 @@ export default function Calendar(){
         let newMealPlan = removeFromMealPlan(dayId,recipeId,position);
         setMealPlanData(newMealPlan);
     }
+    function onGetGroceryList(){
+        const groceryListData = composeGroceryList(mealPlanData);
+        triggerDownloadTXTFile(groceryListData, "grocery-list");
+    }
+
     return(
         <>
         <div className='calendar-days-area'>
@@ -92,6 +99,7 @@ export default function Calendar(){
         }
         </div>
         <button onClick={addDay} disabled={mealPlanData.length>=maxDays}>Add day</button>
+        <button className='download-button' onClick={onGetGroceryList}>Download grocery list</button>
         
         {showModal && <Drawer onClose={() => setShowModal(false)} title={"Select a meal"} onSave={saveRecipe} saveText={selectedIds.length>0?`Add ${selectedIds.length} to meal plan`:""}>
             <RecipeSelectionList selectedIds={selectedIds} onSelectRecipe={onSelectRecipe}/>
