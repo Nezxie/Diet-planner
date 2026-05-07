@@ -66,6 +66,12 @@
   --bg-calendar-button:#000000;
   --bg-calendar-button-active:#1a1a1a;
 
+  /* drag and drop */
+
+  --dropzone-bg:var(--bg-color-editable-text-hover);
+  --drop-accent-color:var(--accent-color);
+  --dropzone-outline: solid 2px var(--drop-accent-color);
+
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

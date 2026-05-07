@@ -20,14 +20,16 @@ export function calculateMealMacro(ingredientList){
     let carbs=0;
     let fat=0;
     let quantity=0;
-    ingredientList.forEach((ingredient) => {
-        let macros = calculateIngredientMacro(ingredient)
-        energy+=macros.nutriens.energy;
-        protein+=macros.nutriens.protein;
-        carbs+=macros.nutriens.carbs;
-        fat+=macros.nutriens.fat;
-        quantity+=ingredient.quantity;
-    });
+    if(ingredientList?.length>0){
+        ingredientList.forEach((ingredient) => {
+            let macros = calculateIngredientMacro(ingredient)
+            energy+=macros.nutriens.energy;
+            protein+=macros.nutriens.protein;
+            carbs+=macros.nutriens.carbs;
+            fat+=macros.nutriens.fat;
+            quantity+=ingredient.quantity;
+        });
+    }
     return ({
         'nutriens':{
             'energy':Math.round(energy),

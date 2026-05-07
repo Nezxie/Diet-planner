@@ -1,0 +1,36 @@
+.main {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+}
+
+.over-dropzone {
+  outline: var(--dropzone-outline);
+  background-color: var(--dropzone-bg);
+}
+
+.placeholder {
+  background-color: var(--bg-card-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  outline: var(--dropzone-outline);
+  opacity:.5;
+}
+
+.drag-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  cursor: grabbing;
+  transform: translate(0, 0);
+}
+
+.draggable {
+  cursor: grab;
+}
+
+.draggable:active {
+  cursor: grabbing;
+}

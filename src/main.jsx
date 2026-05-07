@@ -6,7 +6,7 @@ import App from './App.jsx'
 import RecipePage from './RecipePage.jsx'
 import RecipeListPage from './RecipeListPage.jsx'
 import PreferencesPage from './PreferencesPage.jsx'
-
+import Test from './Drag_and_Drop/test.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -16,6 +16,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/recipe-list" element={<RecipeListPage />} />
         <Route path="/recipe/:recipeId" element={<RecipePage />} />
         <Route path="/preferences" element={<PreferencesPage />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </HashRouter>
   </StrictMode>,

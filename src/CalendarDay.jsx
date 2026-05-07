@@ -4,10 +4,15 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import MacroLabel from './MacroLabel.jsx'
 import {useState, useEffect} from 'react' 
 import {getEmptyMeal, calculateMealMacro, sumTwoMacros} from './utils/calculateMacro.js'
+import {useDropZone} from './Drag_and_Drop/DragProvider.jsx'
 
 export default function CalendarDay({dayId, position, onEditDay, onRemoveDay, onRemoveMeal, recipes}){
     const [dayMacro, setDayMacro] = useState(getEmptyMeal());
-
+    const {
+        ref,
+        isOver
+        } = useDropZone(dayId);
+        
     useEffect(()=>{
         // i could move all that to calculateMacro.js ? or a custom hook maybe
         const sumMealMacro = recipes.reduce((acc, recipe) => {
@@ -18,7 +23,7 @@ export default function CalendarDay({dayId, position, onEditDay, onRemoveDay, on
     },[recipes])
 
     return(
-        <div className="calendar-day">
+        <div className={`calendar-day ${isOver?"over-dropzone":""}`} ref={ref}>
             <section className='calendar-title-row'>
                 <div className='title-row'>
                     <h2>Day {position+1}</h2>
@@ -26,7 +31,7 @@ export default function CalendarDay({dayId, position, onEditDay, onRemoveDay, on
                 </div>
                 <MacroLabel item={dayMacro}/>
             </section>
-            <section className='recipes-list'>{
+            <section className="recipes-list">{
                 recipes.map((recipe, id)=>{
                     return <RecipeInCalendar key={id} recipe={recipe} onRemoveMeal={()=>{onRemoveMeal(recipe.id, id)}}/>  
                 })
