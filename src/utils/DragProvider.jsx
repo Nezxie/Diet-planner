@@ -1,4 +1,5 @@
 import {createContext, useContext , useState, useRef} from 'react'
+import './DragAndDrop.css'
 const DragContext = createContext(null);
 
 export default function DragProvider({children, onDrop, renderDragPreview}){
@@ -9,6 +10,7 @@ export default function DragProvider({children, onDrop, renderDragPreview}){
     const dropZones = useRef([]);
     const overlayRef = useRef(null); //pointer to overlay to do overlay.style.transform = ...
     const activeDragRef = useRef(null);
+    const placeholderStyle = useRef(null);
 
  function registerDropZone(id, element) {
     if (!element) return;
@@ -19,9 +21,12 @@ export default function DragProvider({children, onDrop, renderDragPreview}){
     ];
   }
 
-    function onDragStart(e, instanceId, item){
+    function onDragStart(e, instanceId, item, startingContainer){
+        activeDragRef.current = null;
+        setHoveredZone(null);
         e.currentTarget.setPointerCapture(e.pointerId);
         const bounds = e.currentTarget.getBoundingClientRect();
+        placeholderStyle.current = {width:bounds.width, height:bounds.height};
         pointerOffset.current = {
             x:e.clientX - bounds.left,
             y:e.clientY - bounds.top
@@ -30,7 +35,12 @@ export default function DragProvider({children, onDrop, renderDragPreview}){
             x:e.clientX - pointerOffset.current.x,
             y:e.clientY - pointerOffset.current.y
         }       
-        activeDragRef.current = {instanceId,item};
+        activeDragRef.current = {
+            instanceId,
+            item,
+            startingContainer
+
+        };
 
     }
 
@@ -60,6 +70,7 @@ export default function DragProvider({children, onDrop, renderDragPreview}){
         if(activeDragRef.current && hoveredZone){
             onDrop?.(activeDragRef.current,hoveredZone);
         }
+        e?.currentTarget?.releasePointerCapture?.(e.pointerId);
         activeDragRef.current = null;
         setHoveredZone(null);
     }
@@ -83,6 +94,10 @@ export default function DragProvider({children, onDrop, renderDragPreview}){
         <div
           ref={overlayRef}
           className="drag-overlay"
+          style={{
+            width: placeholderStyle.current.width,
+            height: placeholderStyle.current.height
+            }}
         >
          {renderDragPreview?.(activeDragRef.current.item)}
         </div>
@@ -94,7 +109,7 @@ export default function DragProvider({children, onDrop, renderDragPreview}){
 
 
 
-export function useDraggable(item, instanceId){
+export function useDraggable(item, instanceId, startingContainer){
     const context = useContext(DragContext);
     if(!context)
     throw new Error("useDraggable must be used inside DragProvider");
@@ -104,7 +119,7 @@ export function useDraggable(item, instanceId){
         isDragging,
         listeners:
         {
-            onPointerDown: (e) => context.onDragStart(e,instanceId, item),
+            onPointerDown: (e) => context.onDragStart(e,instanceId, item, startingContainer),
             onPointerMove: context.onDragMove,
             onPointerUp: context.onDragEnd
         }

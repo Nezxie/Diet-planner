@@ -2,6 +2,8 @@ import {useState} from 'react'
 import Drawer from './Drawer'
 import CalendarDay from './CalendarDay.jsx';
 import RecipeSelectionList from './RecipeSelectionList';
+import DragProvider from './utils/DragProvider.jsx'
+import RecipeInCalendar from './RecipeInCalendar.jsx'
 import toast, { Toaster } from 'react-hot-toast';
 import {
     getMealPlansList, 
@@ -78,25 +80,46 @@ export default function Calendar(){
         triggerDownloadTXTFile(groceryListData, "grocery-list");
     }
 
+    function onDropMeal(activeElem,hoveredZone){
+        console.log(activeElem);
+        console.log(hoveredZone);
+        //mealPlanData.map()
+        //now remove from activeElem.startingContainer and add to hoveredZone
+        //activeElem.item.id from activeElem.startingContainer.recipeIds[]
+
+        /*
+        let newMealPlan = removeFromMealPlan(hoveredZone,activeElem.item.id,position==???)
+        newMealPlan = saveToMealPlan(hoveredZone, activeElem.item.id, maxDays);
+        setMealPlanData(newMealPlan);
+
+
+        */
+    }
+
+    const defaultDraggableItem = (item) => {
+          return <RecipeInCalendar recipe={item}/>}
+
     return(
         <>
         <div className='calendar-days-area'>
-            {
-            mealPlanData.length>0?
-                mealPlanData.map((day,index)=>{
-                    return <CalendarDay 
-                    key={day.id}
-                    position = {index} 
-                    dayId={day.id} 
-                    onEditDay={()=>{onEditDay(day.id)}} 
-                    onRemoveDay={()=>{removeDay(day.id)}} 
-                    recipes={day.recipeIds.map(getSavedRecipe)} 
-                    onRemoveMeal={(recipeId, position)=>{removeMeal(day.id,recipeId,position)}}/>
-                })
-            // })
-            :
-            <p>Add a new day to start planing.</p>
-        }
+            <DragProvider onDrop={onDropMeal} renderDragPreview={defaultDraggableItem}>
+                {
+                mealPlanData.length>0?
+                    mealPlanData.map((day,index)=>{
+                        return <CalendarDay 
+                        key={day.id}
+                        position = {index} 
+                        dayId={day.id} 
+                        onEditDay={()=>{onEditDay(day.id)}} 
+                        onRemoveDay={()=>{removeDay(day.id)}} 
+                        recipes={day.recipeIds.map(getSavedRecipe)} 
+                        onRemoveMeal={(recipeId, position)=>{removeMeal(day.id,recipeId,position)}}/>
+                    })
+                // })
+                :
+                <p>Add a new day to start planing.</p>
+            }
+        </DragProvider>
         </div>
         <button onClick={addDay} disabled={mealPlanData.length>=maxDays}>Add day</button>
         <button className='download-button' onClick={onGetGroceryList}>Download grocery list</button>

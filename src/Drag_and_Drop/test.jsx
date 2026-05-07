@@ -1,15 +1,15 @@
-import DragProvider, {useDropZone,useDraggable} from './DragProvider'
+import DragProvider, {useDropZone,useDraggable} from '../utils/DragProvider'
 import { useState } from 'react'
 import {getSavedRecipe, getMealPlansList} from '../utils/recipeStorage'
 import CalendarDay from '../CalendarDay'
 import RecipeInCalendar from '../RecipeInCalendar'
-import './style.css'
+
 export default function Test(){
     const [mealPlanData, setMealPlanData] = useState(getMealPlansList())
     
     return(
     <DragProvider renderDragPreview={(item) => {
-      return <RecipeInCalendar recipe={item} onRemoveMeal={()=>{}} />}}>
+      return <RecipeInCalendar recipe={item}/>}}>
         <div  className='main'>
         {
                     mealPlanData.length>0&&

@@ -4,7 +4,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import MacroLabel from './MacroLabel.jsx'
 import {useState, useEffect} from 'react' 
 import {getEmptyMeal, calculateMealMacro, sumTwoMacros} from './utils/calculateMacro.js'
-import {useDropZone} from './Drag_and_Drop/DragProvider.jsx'
+import {useDropZone} from './utils/DragProvider.jsx'
 
 export default function CalendarDay({dayId, position, onEditDay, onRemoveDay, onRemoveMeal, recipes}){
     const [dayMacro, setDayMacro] = useState(getEmptyMeal());
@@ -33,7 +33,7 @@ export default function CalendarDay({dayId, position, onEditDay, onRemoveDay, on
             </section>
             <section className="recipes-list">{
                 recipes.map((recipe, id)=>{
-                    return <RecipeInCalendar key={id} recipe={recipe} onRemoveMeal={()=>{onRemoveMeal(recipe.id, id)}}/>  
+                    return <RecipeInCalendar key={id} recipe={recipe} onRemoveMeal={()=>{onRemoveMeal(recipe.id, id)}} parentContainerId={dayId}/>  
                 })
             }</section>
             <button onClick={onEditDay}>Add recipes to day {position+1}</button>
